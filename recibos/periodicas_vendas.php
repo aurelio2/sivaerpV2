@@ -110,8 +110,9 @@ $html.= '<table style="font-family: Courier; font-size: 16px; ">';
 $html.='<tbody>';
 $html.='<tr style="background-Color: rgb(203, 209, 252);">';
 $html.='<th width="200" align="center">Produto</th>';
-$html.='<th width="50" align="cenetr">Preco de Compra</th>';
-$html.='<th width="50" align="cenetr">Preco de Venda</th>';
+$html.='<th width="50" align="center">Preco de Compra</th>';
+$html.='<th width="50" align="center">Total de Compra</th>';
+$html.='<th width="50" align="center">Preco de Venda</th>';
 $html.='<th width="50" align="center">Quantidade</th>';
 $html.='<th width="80" align="center">Total</th>';
 $html.='<th width="100" align="center">Margem</th>';
@@ -132,9 +133,11 @@ $html.='</tr></tbody>';
 // 	$html .= '</tr>';
 // }
 while ($row = $consul_s->fetch(PDO::FETCH_OBJ)) {
+    $preco_compra_unitario = $row->compra / $row->qty;
     $html .= '<tr>';
     $html .= '<td align="left">' . strtoupper($row->pname) . '</td>';
-    $html .= '<td align="center">' . number_format($row->compra / $row->qty, 2) . '</td>'; // Preço de compra unitário
+    $html .= '<td align="center">' . number_format($preco_compra_unitario, 2) . '</td>'; // Preço de compra unitário
+    $html .= '<td align="center">' . number_format($row->compra, 2) . '</td>'; // Total de compra (preço compra * quantidade)
     $html .= '<td align="center">' . number_format($row->venda / $row->qty, 2) . '</td>';  // Preço de venda unitário
     $html .= '<td align="center">' . $row->qty . '</td>';
     $html .= '<td align="center">' . number_format($row->venda, 2) . '</td>';
@@ -143,19 +146,23 @@ while ($row = $consul_s->fetch(PDO::FETCH_OBJ)) {
 }
 
 
+$select3 = $pdo->prepare("SELECT SUM(p.purchaseprice * t.qty) as total_compra_sum
+	FROM tbl_invoice_details t
+	INNER JOIN tbl_product p ON p.pid = t.product_id
+	WHERE order_date BETWEEN '$data1' AND '$data2'");
+
+$select3->execute();
+$row3 = $select3->fetch(PDO::FETCH_OBJ);
+$total_compra_sum = $row3->total_compra_sum;
+
 $html .= '<tr style="background-Color: white;">
 <td colspan=1>TOTAL - - - - - - - - - - - - - - - -</td>
 <td align="center">'.number_format($net_total_compras,2).'</td>
-
+<td align="center">'.number_format($total_compra_sum,2).'</td>
 <td align="center">'.number_format($net_total_vendas,2).'</td>
 <td align="center">'.$net_qtd_vendidas.'</td>
-
-
 <td align="center">'.number_format($net_total,2).'</td>
-
-
 <td align="center">'.number_format($net_total_lucros,2).'</td>
-
 </tr>';
 
 $html .= '</table><br><br>';
