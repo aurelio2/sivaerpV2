@@ -51,7 +51,8 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
 <script src="../bower_components/select2/dist/js/select2.full.min.js"></script>  
 <link rel="shortcut icon" href="../siva.ico">     
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<!-- <body class="hold-transition skin-blue sidebar-mini"> -->
+<body class="hold-transition skin-blue sidebar-mini-expand-feature sidebar-collapse">
   <div class="wrapper">
     <header class="main-header">
       <a href="mesa.php" class="logo">
