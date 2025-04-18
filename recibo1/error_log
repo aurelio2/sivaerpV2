@@ -1,0 +1,402 @@
+[06-Dec-2023 19:37:23 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home/ozivainv/sivaerp/recibo1/fecho.php:73
+Stack trace:
+#0 {main}
+  thrown in /home/ozivainv/sivaerp/recibo1/fecho.php on line 73
+[06-Dec-2023 19:37:23 UTC] PHP Stack trace:
+[06-Dec-2023 19:37:23 UTC] PHP   1. newrelic_exception_handler($exception = class Error { protected $message = 'Call to a member function fetch_assoc() on bool'; private $string = 'Error: Call to a member function fetch_assoc() on bool in /home/ozivainv/sivaerp/recibo1/fecho.php:73\nStack trace:\n#0 {main}'; protected $code = 0; protected $file = '/home/ozivainv/sivaerp/recibo1/fecho.php'; protected $line = 73; private $trace = []; private $previous = NULL; public $xdebug_message = '<tr><th align=\'left\' bgcolor=\'#f57900\' colspan="5"><span style=\'background-color: #cc0000; color: #fce94f; font-size: x-large;\'>( ! )</span> Error: Call to a member function fetch_assoc() on bool in /home/ozivainv/sivaerp/recibo1/fecho.php on line <i>73</i></th></tr>\n<tr><th align=\'left\' bgcolor=\'#e9b96e\' colspan=\'5\'>Call Stack</th></tr>\n<tr><th align=\'center\' bgcolor=\'#eeeeec\'>#</th><th align=\'left\' bgcolor=\'#eeeeec\'>Time</th><th align=\'left\' bgcolor=\'#eeeeec\'>Memory</th><th align=\'left\' bgcolor=\'#eeeeec\'>'... }) Unknown:0
+[06-Dec-2023 21:11:41 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/pdfdevedor.php on line 14
+[06-Dec-2023 21:11:41 UTC] PHP Stack trace:
+[06-Dec-2023 21:11:41 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdfdevedor.php:0
+[06-Dec-2023 21:11:41 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/pdfdevedor.php:14
+[18-Dec-2023 15:33:51 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 13
+[18-Dec-2023 15:33:51 UTC] PHP Stack trace:
+[18-Dec-2023 15:33:51 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[18-Dec-2023 15:33:51 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/pdf.php on line 14
+[18-Dec-2023 15:33:51 UTC] PHP Stack trace:
+[18-Dec-2023 15:33:51 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[18-Dec-2023 15:33:51 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/pdf.php:14
+[18-Dec-2023 15:33:51 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 60
+[18-Dec-2023 15:33:51 UTC] PHP Stack trace:
+[18-Dec-2023 15:33:51 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[18-Dec-2023 15:33:51 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 61
+[18-Dec-2023 15:33:51 UTC] PHP Stack trace:
+[18-Dec-2023 15:33:51 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[18-Dec-2023 15:33:51 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 155
+[18-Dec-2023 15:33:51 UTC] PHP Stack trace:
+[18-Dec-2023 15:33:51 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[18-Dec-2023 15:33:51 UTC] PHP Notice:  Trying to get property 'customer_name' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 161
+[18-Dec-2023 15:33:51 UTC] PHP Stack trace:
+[18-Dec-2023 15:33:51 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[18-Dec-2023 15:33:51 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 164
+[18-Dec-2023 15:33:51 UTC] PHP Stack trace:
+[18-Dec-2023 15:33:51 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[29-Jan-2024 08:21:09 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home/ozivainv/sivaerp/recibo1/fecho.php:75
+Stack trace:
+#0 {main}
+  thrown in /home/ozivainv/sivaerp/recibo1/fecho.php on line 75
+[29-Jan-2024 08:21:09 UTC] PHP Stack trace:
+[29-Jan-2024 08:21:09 UTC] PHP   1. newrelic_exception_handler($exception = class Error { protected $message = 'Call to a member function fetch_assoc() on bool'; private $string = 'Error: Call to a member function fetch_assoc() on bool in /home/ozivainv/sivaerp/recibo1/fecho.php:75\nStack trace:\n#0 {main}'; protected $code = 0; protected $file = '/home/ozivainv/sivaerp/recibo1/fecho.php'; protected $line = 75; private $trace = []; private $previous = NULL; public $xdebug_message = '<tr><th align=\'left\' bgcolor=\'#f57900\' colspan="5"><span style=\'background-color: #cc0000; color: #fce94f; font-size: x-large;\'>( ! )</span> Error: Call to a member function fetch_assoc() on bool in /home/ozivainv/sivaerp/recibo1/fecho.php on line <i>75</i></th></tr>\n<tr><th align=\'left\' bgcolor=\'#e9b96e\' colspan=\'5\'>Call Stack</th></tr>\n<tr><th align=\'center\' bgcolor=\'#eeeeec\'>#</th><th align=\'left\' bgcolor=\'#eeeeec\'>Time</th><th align=\'left\' bgcolor=\'#eeeeec\'>Memory</th><th align=\'left\' bgcolor=\'#eeeeec\'>'... }) Unknown:0
+[06-Feb-2024 16:33:58 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/pdfdevedor.php on line 14
+[06-Feb-2024 16:33:58 UTC] PHP Stack trace:
+[06-Feb-2024 16:33:58 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdfdevedor.php:0
+[06-Feb-2024 16:33:58 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/pdfdevedor.php:14
+[14-Mar-2024 12:26:16 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[14-Mar-2024 12:26:16 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:16 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:16 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[14-Mar-2024 12:26:16 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:16 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:16 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[14-Mar-2024 12:26:16 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[14-Mar-2024 12:26:16 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:16 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:16 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[14-Mar-2024 12:26:16 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[14-Mar-2024 12:26:16 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:16 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:16 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[14-Mar-2024 12:26:16 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:16 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:16 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[14-Mar-2024 12:26:16 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:16 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:17 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[14-Mar-2024 12:26:17 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:17 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:17 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[14-Mar-2024 12:26:17 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:17 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:17 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[14-Mar-2024 12:26:17 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[14-Mar-2024 12:26:17 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:17 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:17 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[14-Mar-2024 12:26:17 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[14-Mar-2024 12:26:17 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:17 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:17 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[14-Mar-2024 12:26:17 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:17 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:17 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[14-Mar-2024 12:26:17 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:17 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:29 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[14-Mar-2024 12:26:29 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:29 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:29 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[14-Mar-2024 12:26:29 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:29 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:29 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[14-Mar-2024 12:26:29 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[14-Mar-2024 12:26:29 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:29 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:29 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[14-Mar-2024 12:26:29 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[14-Mar-2024 12:26:29 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:29 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:29 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[14-Mar-2024 12:26:29 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:29 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:26:29 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[14-Mar-2024 12:26:29 UTC] PHP Stack trace:
+[14-Mar-2024 12:26:29 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:35:21 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[14-Mar-2024 12:35:21 UTC] PHP Stack trace:
+[14-Mar-2024 12:35:21 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:35:21 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[14-Mar-2024 12:35:21 UTC] PHP Stack trace:
+[14-Mar-2024 12:35:21 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:35:21 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[14-Mar-2024 12:35:21 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[14-Mar-2024 12:35:21 UTC] PHP Stack trace:
+[14-Mar-2024 12:35:21 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:35:21 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[14-Mar-2024 12:35:21 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[14-Mar-2024 12:35:21 UTC] PHP Stack trace:
+[14-Mar-2024 12:35:21 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:35:21 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[14-Mar-2024 12:35:21 UTC] PHP Stack trace:
+[14-Mar-2024 12:35:21 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[14-Mar-2024 12:35:21 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[14-Mar-2024 12:35:21 UTC] PHP Stack trace:
+[14-Mar-2024 12:35:21 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[15-Mar-2024 14:08:06 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 13
+[15-Mar-2024 14:08:06 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:06 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Mar-2024 14:08:06 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/pdf.php on line 14
+[15-Mar-2024 14:08:06 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:06 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Mar-2024 14:08:06 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/pdf.php:14
+[15-Mar-2024 14:08:06 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/pdf.php on line 22
+[15-Mar-2024 14:08:06 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:06 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Mar-2024 14:08:06 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/pdf.php:22
+[15-Mar-2024 14:08:06 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/pdf.php on line 28
+[15-Mar-2024 14:08:06 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:06 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Mar-2024 14:08:06 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/pdf.php:28
+[15-Mar-2024 14:08:06 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 60
+[15-Mar-2024 14:08:06 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:06 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Mar-2024 14:08:06 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 61
+[15-Mar-2024 14:08:06 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:06 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Mar-2024 14:08:06 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 155
+[15-Mar-2024 14:08:06 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:06 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Mar-2024 14:08:06 UTC] PHP Notice:  Trying to get property 'customer_name' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 161
+[15-Mar-2024 14:08:06 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:06 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Mar-2024 14:08:06 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 164
+[15-Mar-2024 14:08:06 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:06 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Mar-2024 14:08:39 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[15-Mar-2024 14:08:39 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:39 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[15-Mar-2024 14:08:39 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[15-Mar-2024 14:08:39 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:39 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[15-Mar-2024 14:08:39 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[15-Mar-2024 14:08:39 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[15-Mar-2024 14:08:39 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:39 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[15-Mar-2024 14:08:39 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[15-Mar-2024 14:08:39 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[15-Mar-2024 14:08:39 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:39 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[15-Mar-2024 14:08:39 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[15-Mar-2024 14:08:39 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:39 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[15-Mar-2024 14:08:39 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[15-Mar-2024 14:08:39 UTC] PHP Stack trace:
+[15-Mar-2024 14:08:39 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Mar-2024 09:57:30 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[16-Mar-2024 09:57:30 UTC] PHP Stack trace:
+[16-Mar-2024 09:57:30 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Mar-2024 09:57:30 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[16-Mar-2024 09:57:30 UTC] PHP Stack trace:
+[16-Mar-2024 09:57:30 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Mar-2024 09:57:30 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[16-Mar-2024 09:57:30 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[16-Mar-2024 09:57:30 UTC] PHP Stack trace:
+[16-Mar-2024 09:57:30 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Mar-2024 09:57:30 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[16-Mar-2024 09:57:30 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[16-Mar-2024 09:57:30 UTC] PHP Stack trace:
+[16-Mar-2024 09:57:30 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Mar-2024 09:57:30 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[16-Mar-2024 09:57:30 UTC] PHP Stack trace:
+[16-Mar-2024 09:57:30 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Mar-2024 09:57:30 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[16-Mar-2024 09:57:30 UTC] PHP Stack trace:
+[16-Mar-2024 09:57:30 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Mar-2024 09:59:27 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[16-Mar-2024 09:59:27 UTC] PHP Stack trace:
+[16-Mar-2024 09:59:27 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Mar-2024 09:59:27 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[16-Mar-2024 09:59:27 UTC] PHP Stack trace:
+[16-Mar-2024 09:59:27 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Mar-2024 09:59:27 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[16-Mar-2024 09:59:27 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[16-Mar-2024 09:59:27 UTC] PHP Stack trace:
+[16-Mar-2024 09:59:27 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Mar-2024 09:59:27 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[16-Mar-2024 09:59:27 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[16-Mar-2024 09:59:27 UTC] PHP Stack trace:
+[16-Mar-2024 09:59:27 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Mar-2024 09:59:27 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[16-Mar-2024 09:59:27 UTC] PHP Stack trace:
+[16-Mar-2024 09:59:27 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Mar-2024 09:59:27 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[16-Mar-2024 09:59:27 UTC] PHP Stack trace:
+[16-Mar-2024 09:59:27 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[24-Mar-2024 15:54:37 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[24-Mar-2024 15:54:37 UTC] PHP Stack trace:
+[24-Mar-2024 15:54:37 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[24-Mar-2024 15:54:37 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[24-Mar-2024 15:54:37 UTC] PHP Stack trace:
+[24-Mar-2024 15:54:37 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[24-Mar-2024 15:54:37 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[24-Mar-2024 15:54:37 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[24-Mar-2024 15:54:37 UTC] PHP Stack trace:
+[24-Mar-2024 15:54:37 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[24-Mar-2024 15:54:37 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[24-Mar-2024 15:54:37 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[24-Mar-2024 15:54:37 UTC] PHP Stack trace:
+[24-Mar-2024 15:54:37 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[24-Mar-2024 15:54:37 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[24-Mar-2024 15:54:37 UTC] PHP Stack trace:
+[24-Mar-2024 15:54:37 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[24-Mar-2024 15:54:37 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[24-Mar-2024 15:54:37 UTC] PHP Stack trace:
+[24-Mar-2024 15:54:37 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[02-Apr-2024 13:38:34 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[02-Apr-2024 13:38:34 UTC] PHP Stack trace:
+[02-Apr-2024 13:38:34 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[02-Apr-2024 13:38:34 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[02-Apr-2024 13:38:34 UTC] PHP Stack trace:
+[02-Apr-2024 13:38:34 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[02-Apr-2024 13:38:34 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[02-Apr-2024 13:38:34 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[02-Apr-2024 13:38:34 UTC] PHP Stack trace:
+[02-Apr-2024 13:38:34 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[02-Apr-2024 13:38:34 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[02-Apr-2024 13:38:34 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[02-Apr-2024 13:38:34 UTC] PHP Stack trace:
+[02-Apr-2024 13:38:34 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[02-Apr-2024 13:38:34 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[02-Apr-2024 13:38:34 UTC] PHP Stack trace:
+[02-Apr-2024 13:38:34 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[02-Apr-2024 13:38:34 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[02-Apr-2024 13:38:34 UTC] PHP Stack trace:
+[02-Apr-2024 13:38:34 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[02-Apr-2024 14:23:50 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[02-Apr-2024 14:23:50 UTC] PHP Stack trace:
+[02-Apr-2024 14:23:50 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[02-Apr-2024 14:23:50 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[02-Apr-2024 14:23:50 UTC] PHP Stack trace:
+[02-Apr-2024 14:23:50 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[02-Apr-2024 14:23:50 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[02-Apr-2024 14:23:50 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[02-Apr-2024 14:23:50 UTC] PHP Stack trace:
+[02-Apr-2024 14:23:50 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[02-Apr-2024 14:23:50 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[02-Apr-2024 14:23:50 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[02-Apr-2024 14:23:50 UTC] PHP Stack trace:
+[02-Apr-2024 14:23:50 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[02-Apr-2024 14:23:50 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[02-Apr-2024 14:23:50 UTC] PHP Stack trace:
+[02-Apr-2024 14:23:50 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[02-Apr-2024 14:23:50 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[02-Apr-2024 14:23:50 UTC] PHP Stack trace:
+[02-Apr-2024 14:23:50 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[15-Apr-2024 13:20:02 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 13
+[15-Apr-2024 13:20:02 UTC] PHP Stack trace:
+[15-Apr-2024 13:20:02 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Apr-2024 13:20:02 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/pdf.php on line 14
+[15-Apr-2024 13:20:02 UTC] PHP Stack trace:
+[15-Apr-2024 13:20:02 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Apr-2024 13:20:02 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/pdf.php:14
+[15-Apr-2024 13:20:02 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/pdf.php on line 22
+[15-Apr-2024 13:20:02 UTC] PHP Stack trace:
+[15-Apr-2024 13:20:02 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Apr-2024 13:20:02 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/pdf.php:22
+[15-Apr-2024 13:20:02 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/pdf.php on line 28
+[15-Apr-2024 13:20:02 UTC] PHP Stack trace:
+[15-Apr-2024 13:20:02 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Apr-2024 13:20:02 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/pdf.php:28
+[15-Apr-2024 13:20:02 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 60
+[15-Apr-2024 13:20:02 UTC] PHP Stack trace:
+[15-Apr-2024 13:20:02 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Apr-2024 13:20:02 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 61
+[15-Apr-2024 13:20:02 UTC] PHP Stack trace:
+[15-Apr-2024 13:20:02 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Apr-2024 13:20:02 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 155
+[15-Apr-2024 13:20:02 UTC] PHP Stack trace:
+[15-Apr-2024 13:20:02 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Apr-2024 13:20:02 UTC] PHP Notice:  Trying to get property 'customer_name' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 161
+[15-Apr-2024 13:20:02 UTC] PHP Stack trace:
+[15-Apr-2024 13:20:02 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[15-Apr-2024 13:20:02 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/pdf.php on line 164
+[15-Apr-2024 13:20:02 UTC] PHP Stack trace:
+[15-Apr-2024 13:20:02 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/pdf.php:0
+[16-Apr-2024 16:16:51 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[16-Apr-2024 16:16:51 UTC] PHP Stack trace:
+[16-Apr-2024 16:16:51 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Apr-2024 16:16:51 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[16-Apr-2024 16:16:51 UTC] PHP Stack trace:
+[16-Apr-2024 16:16:51 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Apr-2024 16:16:51 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[16-Apr-2024 16:16:51 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[16-Apr-2024 16:16:51 UTC] PHP Stack trace:
+[16-Apr-2024 16:16:51 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Apr-2024 16:16:51 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[16-Apr-2024 16:16:51 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[16-Apr-2024 16:16:51 UTC] PHP Stack trace:
+[16-Apr-2024 16:16:51 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Apr-2024 16:16:51 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[16-Apr-2024 16:16:51 UTC] PHP Stack trace:
+[16-Apr-2024 16:16:51 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[16-Apr-2024 16:16:51 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[16-Apr-2024 16:16:51 UTC] PHP Stack trace:
+[16-Apr-2024 16:16:51 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[17-Apr-2024 19:37:42 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[17-Apr-2024 19:37:42 UTC] PHP Stack trace:
+[17-Apr-2024 19:37:42 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[17-Apr-2024 19:37:42 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[17-Apr-2024 19:37:42 UTC] PHP Stack trace:
+[17-Apr-2024 19:37:42 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[17-Apr-2024 19:37:42 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[17-Apr-2024 19:37:42 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[17-Apr-2024 19:37:42 UTC] PHP Stack trace:
+[17-Apr-2024 19:37:42 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[17-Apr-2024 19:37:42 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[17-Apr-2024 19:37:42 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[17-Apr-2024 19:37:42 UTC] PHP Stack trace:
+[17-Apr-2024 19:37:42 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[17-Apr-2024 19:37:42 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[17-Apr-2024 19:37:42 UTC] PHP Stack trace:
+[17-Apr-2024 19:37:42 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[17-Apr-2024 19:37:42 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[17-Apr-2024 19:37:42 UTC] PHP Stack trace:
+[17-Apr-2024 19:37:42 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[10-May-2024 09:52:35 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[10-May-2024 09:52:35 UTC] PHP Stack trace:
+[10-May-2024 09:52:35 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[10-May-2024 09:52:35 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[10-May-2024 09:52:35 UTC] PHP Stack trace:
+[10-May-2024 09:52:35 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[10-May-2024 09:52:35 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[10-May-2024 09:52:35 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[10-May-2024 09:52:35 UTC] PHP Stack trace:
+[10-May-2024 09:52:35 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[10-May-2024 09:52:35 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[10-May-2024 09:52:35 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[10-May-2024 09:52:35 UTC] PHP Stack trace:
+[10-May-2024 09:52:35 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[10-May-2024 09:52:35 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[10-May-2024 09:52:35 UTC] PHP Stack trace:
+[10-May-2024 09:52:35 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[10-May-2024 09:52:35 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[10-May-2024 09:52:35 UTC] PHP Stack trace:
+[10-May-2024 09:52:35 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[10-May-2024 09:52:50 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[10-May-2024 09:52:50 UTC] PHP Stack trace:
+[10-May-2024 09:52:50 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[10-May-2024 09:52:50 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[10-May-2024 09:52:50 UTC] PHP Stack trace:
+[10-May-2024 09:52:50 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[10-May-2024 09:52:50 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[10-May-2024 09:52:50 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[10-May-2024 09:52:50 UTC] PHP Stack trace:
+[10-May-2024 09:52:50 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[10-May-2024 09:52:50 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[10-May-2024 09:52:50 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[10-May-2024 09:52:50 UTC] PHP Stack trace:
+[10-May-2024 09:52:50 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[10-May-2024 09:52:50 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[10-May-2024 09:52:50 UTC] PHP Stack trace:
+[10-May-2024 09:52:50 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[10-May-2024 09:52:50 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[10-May-2024 09:52:50 UTC] PHP Stack trace:
+[10-May-2024 09:52:50 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[12-May-2024 10:53:59 UTC] PHP Notice:  Trying to get property 'mesa' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 13
+[12-May-2024 10:53:59 UTC] PHP Stack trace:
+[12-May-2024 10:53:59 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[12-May-2024 10:53:59 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 14
+[12-May-2024 10:53:59 UTC] PHP Stack trace:
+[12-May-2024 10:53:59 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[12-May-2024 10:53:59 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:14
+[12-May-2024 10:53:59 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/ozivainv/sivaerp/recibo1/conta.php on line 22
+[12-May-2024 10:53:59 UTC] PHP Stack trace:
+[12-May-2024 10:53:59 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[12-May-2024 10:53:59 UTC] PHP   2. mysqli_fetch_array($result = FALSE) /home/ozivainv/sivaerp/recibo1/conta.php:22
+[12-May-2024 10:53:59 UTC] PHP Notice:  Trying to get property 'invoice_id' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 51
+[12-May-2024 10:53:59 UTC] PHP Stack trace:
+[12-May-2024 10:53:59 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[12-May-2024 10:53:59 UTC] PHP Notice:  Trying to get property 'total' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 91
+[12-May-2024 10:53:59 UTC] PHP Stack trace:
+[12-May-2024 10:53:59 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0
+[12-May-2024 10:53:59 UTC] PHP Notice:  Trying to get property 'order_date' of non-object in /home/ozivainv/sivaerp/recibo1/conta.php on line 98
+[12-May-2024 10:53:59 UTC] PHP Stack trace:
+[12-May-2024 10:53:59 UTC] PHP   1. {main}() /home/ozivainv/sivaerp/recibo1/conta.php:0

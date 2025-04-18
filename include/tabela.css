@@ -1,0 +1,29 @@
+    <style type="text/css">
+      .w20 {width:20px !important;}
+      .w200 {width:200px !important;}
+      table.grid {
+       display:inline-block;
+        table-layout:fixed;
+        border-collapse:separate;
+        border-spacing:0px;
+        border:#333333 1px double;
+      }
+      table.grid th {
+        background:#EEEEEE;
+        border-top:#FFFFFF 1px solid;
+        border-left:#FFFFFF 1px solid;
+        border-right:#CCCCCC 1px solid;
+        border-bottom:#CCCCCC 1px solid;
+		text-align: center;
+      }
+      table.grid td {
+        border-top:#FFFFFF 1px solid;
+        border-left:#FFFFFF 1px solid;
+        border-right:#CCCCCC 1px solid;
+        border-bottom:#CCCCCC 1px solid;
+      }
+      table.grid tbody {
+        overflow-y:scroll;
+        overflow-x:hidden;
+      }
+    </style>

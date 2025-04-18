@@ -1,0 +1,111 @@
+[26-Jan-2021 09:58:07 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 57
+[26-Jan-2021 09:58:07 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 63
+[26-Jan-2021 09:58:07 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 71
+[26-Jan-2021 09:58:07 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 78
+[26-Jan-2021 10:26:19 UTC] PHP Warning:  include_once(../dbconnet.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda1/createorder.php on line 3
+[26-Jan-2021 10:26:19 UTC] PHP Warning:  include_once(): Failed opening '../dbconnet.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda1/createorder.php on line 3
+[26-Jan-2021 10:26:19 UTC] PHP Fatal error:  Call to a member function prepare() on null in /home/qanicomz/public_html/venda1/createorder.php on line 20
+[26-Jan-2021 10:26:23 UTC] PHP Warning:  include_once(../dbconnet.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda1/createorder.php on line 3
+[26-Jan-2021 10:26:23 UTC] PHP Warning:  include_once(): Failed opening '../dbconnet.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda1/createorder.php on line 3
+[26-Jan-2021 10:26:23 UTC] PHP Fatal error:  Call to a member function prepare() on null in /home/qanicomz/public_html/venda1/createorder.php on line 20
+[26-Jan-2021 10:29:05 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 57
+[26-Jan-2021 10:29:05 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 63
+[26-Jan-2021 10:29:05 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 71
+[26-Jan-2021 10:29:05 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 78
+[26-Jan-2021 10:45:59 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 57
+[26-Jan-2021 10:45:59 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 63
+[26-Jan-2021 10:45:59 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 71
+[26-Jan-2021 10:45:59 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 78
+[26-Jan-2021 10:47:15 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 57
+[26-Jan-2021 10:47:15 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 63
+[26-Jan-2021 10:47:15 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 71
+[26-Jan-2021 10:47:15 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 78
+[26-Jan-2021 13:20:25 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 57
+[26-Jan-2021 13:20:25 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 63
+[26-Jan-2021 13:20:25 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 71
+[26-Jan-2021 13:20:25 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 78
+[28-Jan-2021 10:32:48 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 57
+[28-Jan-2021 10:32:48 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 63
+[28-Jan-2021 10:32:48 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 71
+[28-Jan-2021 10:32:48 UTC] PHP Warning:  Creating default object from empty value in /home/qanicomz/public_html/venda1/imprime.php on line 78
+[28-Jan-2021 13:14:39 UTC] PHP Parse error:  syntax error, unexpected ''.'' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home/qanicomz/public_html/venda1/diario.php on line 163
+[28-Jan-2021 13:14:43 UTC] PHP Parse error:  syntax error, unexpected ''.'' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home/qanicomz/public_html/venda1/diario.php on line 163
+[28-Jan-2021 13:14:56 UTC] PHP Parse error:  syntax error, unexpected ''.'' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home/qanicomz/public_html/venda1/diario.php on line 163
+[30-Jan-2021 16:52:25 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:52:25 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:52:50 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:52:50 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:53:18 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:53:18 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:53:21 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:53:21 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:53:23 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:53:23 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:53:44 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:53:44 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:53:46 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:53:46 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:54:07 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 16:54:07 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:07:37 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:07:37 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:08:03 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:08:03 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:08:57 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:08:57 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:09:21 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:09:21 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:09:41 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:09:41 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:10:06 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:10:06 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:10:11 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:10:11 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:10:32 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:10:32 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:10:35 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:10:35 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:11:02 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:11:02 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:11:28 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:11:28 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:11:30 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:11:30 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:11:57 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:11:57 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:12:23 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:12:23 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:12:23 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:12:23 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/mesa.php on line 3
+[30-Jan-2021 17:29:00 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/createorder.php on line 3
+[30-Jan-2021 17:29:00 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/createorder.php on line 3
+[30-Jan-2021 17:29:00 UTC] PHP Warning:  include_once(../conexao.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/createorder.php on line 4
+[30-Jan-2021 17:29:00 UTC] PHP Warning:  include_once(): Failed opening '../conexao.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/createorder.php on line 4
+[30-Jan-2021 17:29:00 UTC] PHP Fatal error:  Call to a member function prepare() on null in /home/qanicomz/public_html/venda/venda1/createorder.php on line 20
+[30-Jan-2021 17:29:05 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/createorder.php on line 3
+[30-Jan-2021 17:29:05 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/createorder.php on line 3
+[30-Jan-2021 17:29:05 UTC] PHP Warning:  include_once(../conexao.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/createorder.php on line 4
+[30-Jan-2021 17:29:05 UTC] PHP Warning:  include_once(): Failed opening '../conexao.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/createorder.php on line 4
+[30-Jan-2021 17:29:05 UTC] PHP Fatal error:  Call to a member function prepare() on null in /home/qanicomz/public_html/venda/venda1/createorder.php on line 20
+[30-Jan-2021 17:32:37 UTC] PHP Warning:  include_once(../../cabecalho_user.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:32:37 UTC] PHP Warning:  include_once(): Failed opening '../../cabecalho_user.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:33:55 UTC] PHP Warning:  include_once(../venda1/cabecalho_user.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:33:55 UTC] PHP Warning:  include_once(): Failed opening '../venda1/cabecalho_user.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:34:24 UTC] PHP Warning:  include_once(../venda1/cabecalho_user.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:34:24 UTC] PHP Warning:  include_once(): Failed opening '../venda1/cabecalho_user.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:35:15 UTC] PHP Warning:  include_once(../venda1/cabecalho_user.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:35:15 UTC] PHP Warning:  include_once(): Failed opening '../venda1/cabecalho_user.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:35:43 UTC] PHP Warning:  include_once(../../cabecalho_user.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:35:43 UTC] PHP Warning:  include_once(): Failed opening '../../cabecalho_user.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:36:32 UTC] PHP Warning:  include_once(cabecalho_user.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:36:32 UTC] PHP Warning:  include_once(): Failed opening 'cabecalho_user.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:42:06 UTC] PHP Warning:  include_once(../venda1/cabecalho_user.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:42:06 UTC] PHP Warning:  include_once(): Failed opening '../venda1/cabecalho_user.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:42:20 UTC] PHP Warning:  include_once(../venda/cabecalho_user.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:42:20 UTC] PHP Warning:  include_once(): Failed opening '../venda/cabecalho_user.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/createorder.php on line 155
+[30-Jan-2021 17:42:56 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/diario.php on line 3
+[30-Jan-2021 17:42:56 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/diario.php on line 3
+[30-Jan-2021 17:43:04 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/diario.php on line 3
+[30-Jan-2021 17:43:04 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/diario.php on line 3
+[30-Jan-2021 17:43:14 UTC] PHP Warning:  include_once(../dbconnect.php): failed to open stream: No such file or directory in /home/qanicomz/public_html/venda/venda1/diario.php on line 3
+[30-Jan-2021 17:43:14 UTC] PHP Warning:  include_once(): Failed opening '../dbconnect.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/qanicomz/public_html/venda/venda1/diario.php on line 3
