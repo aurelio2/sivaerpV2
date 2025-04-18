@@ -10,7 +10,18 @@ $data = getDataCaixaAberto($idUser, $mysqli);
 
 //if($verifica>0){
 $mid=$_GET['id'];
-$select=$pdo->prepare("select * from tbl_mesa where cod_mesa=$mid");
+
+// Verifica se $mid é um valor numérico ou texto (como 'Balcao Geral')
+if (!is_numeric($mid)) {
+    // Se for 'Balcao Geral' ou outro texto, usa o código 55 para consultas
+    $mid_numerico = 55;
+    $eh_balcao = true;
+} else {
+    $mid_numerico = $mid;
+    $eh_balcao = ($mid == 55);
+}
+
+$select=$pdo->prepare("select * from tbl_mesa where cod_mesa=$mid_numerico");
 $select->execute();
 $row=$select->fetch(PDO::FETCH_ASSOC);
 
@@ -18,7 +29,7 @@ $row=$select->fetch(PDO::FETCH_ASSOC);
 $codemesa=$row['cod_mesa'];
 
 $sql = mysqli_query($mysqli, "SELECT * FROM client_order_detalhes WHERE id =
-          (select MAX(id) from client_order_detalhes where id_order=$mid )");
+          (select MAX(id) from client_order_detalhes where id_order=$mid_numerico )");
 
 $res = mysqli_fetch_array($sql);
 $id_client_order = $res['id'];
@@ -121,8 +132,8 @@ if(isset($_POST['btnsaveorder'])){
     //$arr_t_sub=$_POST['Subtotal'];
     $arr_t_iva=$_POST['totaliva'];
 
-    if($mid==55){
-        $insert_mesa=$pdo->prepare("UPDATE tbl_mesa SET status=:estado where cod_mesa=$mid");
+    if($mid_numerico==55){
+        $insert_mesa=$pdo->prepare("UPDATE tbl_mesa SET status=:estado where cod_mesa=$mid_numerico");
     $insert_mesa->bindParam(":estado",$mesa1);
     $insert_mesa->execute();
     
@@ -130,21 +141,29 @@ if(isset($_POST['btnsaveorder'])){
     $insert->bindParam(':cust',$customer_name);
     $insert->bindParam(':orderdate',$order_date);
     $insert->bindParam(':total',$total);
-    $insert->bindParam(':mesa',$mid);
+    $insert->bindParam(':mesa',$mid_numerico);
     $insert->bindParam(':subtotal',$sub_total);
      $insert->bindParam(':user',$idUser);
     //$insert->bindParam(':iva',$iva);
     $insert->execute();
     }else{
-    $insert_mesa=$pdo->prepare("UPDATE tbl_mesa SET status=:estado where cod_mesa=$mid");
+    $insert_mesa=$pdo->prepare("UPDATE tbl_mesa SET status=:estado where cod_mesa=$mid_numerico");
     $insert_mesa->bindParam(":estado",$mesa1);
     $insert_mesa->execute();
+    
+    // Verifica se $mesa é numérico ou texto
+    if (!is_numeric($mesa)) {
+        // Se for 'Balcao Geral' ou outro texto, usa um código predefinido (como 55 para balão)
+        $mesa_cod = 55; // Código numérico para representar Balcao Geral
+    } else {
+        $mesa_cod = $mesa; // Se já for numérico, usa o mesmo valor
+    }
     
     $insert=$pdo->prepare("insert into tbl_invoice(mesa,customer_name,order_date,subtotal,total,user)values(:mesa,:cust,:orderdate,:subtotal,:total,:user)");
     $insert->bindParam(':cust',$customer_name);
     $insert->bindParam(':orderdate',$order_date);
     $insert->bindParam(':total',$total);
-    $insert->bindParam(':mesa',$mesa);
+    $insert->bindParam(':mesa',$mesa_cod); // Usa o valor numérico
     $insert->bindParam(':subtotal',$sub_total);
      $insert->bindParam(':user',$idUser);
     //$insert->bindParam(':iva',$iva);
@@ -205,12 +224,12 @@ if(isset($_POST['btnsaveorder'])){
      }        
    //  echo"success fully created order";    
      //Balcao o seu codigo é 55
-   if($mid==55){
+   if($mid_numerico==55){
         //echo "Hello";
-   // <a href="pagar.php?id='.$id.'&op=det&max='.$max.'" class="small-box-footer"><img src="../images/icons8-request_money.png"> '.$rows->total.' MT</a>
-    header('location:pagar.php?id=55&op=det&max=0'.$invoice_id.'');
+   // <a href="editorder?id='.$id.'&op=det&max='.$max.'" class="small-box-footer"><img src="../images/icons8-request_money.png"> '.$rows->total.' MT</a>
+    header('location:pagar?id=55&op=det&max=0'.$invoice_id.'');
    }else{
-        header('location:mesa.php');     
+        header('location:mesa');     
    }
      
  }
@@ -368,13 +387,18 @@ if(isset($_POST['btnsaveorder'])){
                     <div class="col-md-6">
                         <div class="form-group">                       
                             <div class="input-group">
-                                <input type="hidden" class="form-control" name="txtcustomer" value="<?php echo $Nome;?>" required>
+                                <?php if($mid == 55): // Se for Balcao Geral, mostra campo para nome ?>
+                                <label for="txtcustomer">Nome do Cliente</label>
+                                <input type="text" class="form-control" name="txtcustomer" value="" required placeholder="Insira o nome do cliente">
+                                <?php else: // Caso contrário, mantém campo oculto ?>
+                                <input type="hidden" class="form-control" name="txtcustomer" value="<?php echo $nome_cliente_db ? $nome_cliente_db : 'Cliente'; ?>" required>
+                                <?php endif; ?>
                                 <input type="hidden" class="form-control pull-right" id="datepicker" name="orderdate" value="<?php echo date("Y-m-d");?>" data-date-format="yyyy-mm-dd" >
                                 <input type="hidden" class="form-control pull-right" id="datepicker" name="txtmesa" value="1">
                             </div>
                         </div>
-                    </div>
-                </div> <!-- this is for customer and date -->
+                    </div> <!-- this is for customer and date -->
+                </div> <!-- fechando o primeiro box-body -->
                 <div class="box-body">
                     <!-- Layout de duas colunas -->
                     <div class="row">
@@ -807,7 +831,7 @@ $caixa_aberto = existeCaixaAberto($idUser, $mysqli);
 if (!$caixa_aberto) {
     echo '<script>
     alert("É necessário abrir o caixa antes de realizar vendas!");
-    window.location.href = "abrir_caixa.php";
+    window.location.href = "mesa";
     </script>';
     exit;
 }

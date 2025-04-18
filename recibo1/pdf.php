@@ -57,9 +57,9 @@ $pdf = new FPDF('P','mm',array(82,210));
 
 //add new page
 $pdf->AddPage();
-$pdf->Image('../images/texas.png', 27,2,30);
+$pdf->Image('../images/logo.jpg', 27,2,30);
 // $pdf->Ln(24);
-$pdf->Ln(7);
+$pdf->Ln(20);
 //set font to arial, bold, 16pt
 //$pdf->SetFont('Arial','B',16);
 //Cell(width , height , text , border , end line , [align] 

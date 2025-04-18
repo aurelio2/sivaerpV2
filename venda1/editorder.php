@@ -44,7 +44,7 @@ $caixa_aberto = existeCaixaAberto($idUser, $mysqli);
 if (!$caixa_aberto) {
     echo '<script>
     alert("É necessário abrir o caixa antes de editar vendas!");
-    window.location.href = "abrir_caixa.php";
+    window.location.href = "abrir_caixa";
     </script>';
     exit;
 }
@@ -54,92 +54,104 @@ $select->execute();
 $row_invoice_details=$select->fetchAll(PDO::FETCH_ASSOC);
 
 
-if(isset($_POST['btnupdateorder'])){
-    $txt_customer_name=$_POST['txtcustomer'];
-    $txt_order_date=date('Y-m-d',strtotime($_POST['orderdate']));
-    $txt_total=$_POST['txttotal'];
-    $txt_subtotal=$_POST['txt_subtotal'];
-    $mesa_text=$_POST['txt_mesa'];
+if(isset($_POST['btnupdateorder'])) {
+    try {
+        $txt_customer_name = $_POST['txtcustomer'];
+        $txt_order_date = date('Y-m-d',strtotime($_POST['orderdate']));
+        $txt_total = $_POST['txttotal'];
+        $txt_subtotal = $_POST['txt_subtotal'];
+        $mesa_text = $_POST['txt_mesa'];
 
+        $arr_productid = isset($_POST['productid']) ? $_POST['productid'] : array();
+        $arr_productname = isset($_POST['productname']) ? $_POST['productname'] : array();
+        $arr_stock = isset($_POST['stock']) ? $_POST['stock'] : array();
+        $arr_qty = isset($_POST['qty']) ? $_POST['qty'] : array();
+        $arr_price = isset($_POST['price']) ? $_POST['price'] : array();
+        $arr_total = isset($_POST['total']) ? $_POST['total'] : array();
+        $arr_t_iva = isset($_POST['totaliva']) ? $_POST['totaliva'] : array();
+        
+        // Restore stock for removed products
+        foreach($row_invoice_details as $item_invoice_details) {
+            $updateproduct = $pdo->prepare("UPDATE tbl_product SET pstock = pstock + :qty WHERE pid = :pid");
+            $updateproduct->bindParam(':qty', $item_invoice_details['qty']);
+            $updateproduct->bindParam(':pid', $item_invoice_details['product_id']);
+            $updateproduct->execute();
+        }    
+        
+        // Delete existing invoice details
+        $delete_invoice_details = $pdo->prepare("DELETE FROM tbl_invoice_details WHERE invoice_id = :id");
+        $delete_invoice_details->bindParam(':id', $id);
+        $delete_invoice_details->execute();    
+        
+        // Update invoice header
+        $update_invoice = $pdo->prepare("UPDATE tbl_invoice SET mesa = :mesa, customer_name = :cust, order_date = :orderdate, total = :total, subtotal = :subtotal WHERE invoice_id = :id");
+        $update_invoice->bindParam(':mesa', $mesa_text);
+        $update_invoice->bindParam(':cust', $txt_customer_name);
+        $update_invoice->bindParam(':orderdate', $txt_order_date);
+        $update_invoice->bindParam(':total', $txt_total);
+        $update_invoice->bindParam(':subtotal', $txt_subtotal);
+        $update_invoice->bindParam(':id', $id);
+        $update_invoice->execute();
 
-    ////////////////////////////////
-    
-    $arr_productid=$_POST['productid'];
-    $arr_productname=$_POST['productname'];
-    $arr_stock=$_POST['stock'];
-    $arr_qty=$_POST['qty'];
-    $arr_price=$_POST['price'];
-    $arr_total=$_POST['total'];
-    //$arr_categoria=$_POST['categary'];
-    //$arr_t_sub=$_POST['Subtotal'];
-    $arr_t_iva=$_POST['totaliva'];
-    
-    foreach($row_invoice_details as $item_invoice_details){
+        // Insert new invoice details
+        if (!empty($arr_productid)) {
+            for($i = 0; $i < count($arr_productid); $i++) {
+                // Update stock for each product
+                $selectpdt = $pdo->prepare("SELECT pstock FROM tbl_product WHERE pid = :pid");
+                $selectpdt->bindParam(':pid', $arr_productid[$i]);
+                $selectpdt->execute();
+                $rowpdt = $selectpdt->fetch(PDO::FETCH_OBJ);
+                
+                if ($rowpdt) {
+                    $new_stock = $rowpdt->pstock - $arr_qty[$i];
+                    if ($new_stock >= 0) {
+                        $update = $pdo->prepare("UPDATE tbl_product SET pstock = :stock WHERE pid = :pid");
+                        $update->bindParam(':stock', $new_stock);
+                        $update->bindParam(':pid', $arr_productid[$i]);
+                        $update->execute();
 
-        $updateproduct=$pdo->prepare("update tbl_product set pstock=pstock+".$item_invoice_details['qty']." where pid='".$item_invoice_details['product_id']."'");
-        $updateproduct->execute();
-    }    
-    
-    $delete_invoice_details=$pdo->prepare("delete from tbl_invoice_details where invoice_id=$id");
-    $delete_invoice_details->execute();    
-    
-    // 4) Write update query for tbl_invoice table data.
-    $update_invoice=$pdo->prepare("update tbl_invoice set mesa=:mesa, customer_name=:cust,order_date=:orderdate,total=:total,subtotal=:subtotal where invoice_id=$id");
-    $update_invoice->bindParam(':cust',$txt_customer_name);
-    $update_invoice->bindParam(':orderdate',$txt_order_date);
-    $update_invoice->bindParam(':total',$txt_total);
-    $update_invoice->bindParam(':mesa',$mesa_text);
-    $update_invoice->bindParam(':subtotal',$txt_subtotal);
-    $update_invoice->execute();
-    
-    $invoice_id=$pdo->lastInsertId();
-    if($invoice_id!=null){
-
-        for($i=0 ; $i<count($arr_productid) ; $i++){
-            $selectpdt=$pdo->prepare("select * from tbl_product where pid='".$arr_productid[$i]."'");
-            $selectpdt->execute();
-
-            while($rowpdt=$selectpdt->fetch(PDO::FETCH_OBJ)){
-            $db_stock[$i]=$rowpdt->pstock;
-                if($db_stock[$i]==0){
-
-                $rem_qty[$i]=0;
-
-            }else{
-            $rem_qty = $db_stock[$i]-$arr_qty[$i];                
-               $update=$pdo->prepare("update tbl_product SET pstock ='$rem_qty' where pid='".$arr_productid[$i]."'");
-               $update->execute();
-           }
-       }    
-
-
-       $insert=$pdo->prepare("insert into tbl_invoice_details(invoice_id,product_id,product_name,qty,price,total,t_iva,order_date) values(:invid,:pid,:pname,:qty,:price,:total,:t_iva,:orderdate)");
-       $insert->bindParam(':invid',$id);
-       $insert->bindParam(':pid', $arr_productid[$i]);
-       $insert->bindParam(':pname',$arr_productname[$i]);
-       $insert->bindParam(':qty',$arr_qty[$i]);
-       $insert->bindParam(':price',$arr_price[$i]);
-       $insert->bindParam(':total',$arr_total[$i]);
-       $insert->bindParam(':orderdate',$txt_order_date);
-       //$insert->bindParam(':t_sub',$arr_t_sub[$i]);
-       $insert->bindParam(':t_iva',$arr_t_iva[$i]);
-       $insert->execute();
-
-   }        
-   header('location:mesa.php');     
-}    
+                        // Insert invoice detail
+                        $insert = $pdo->prepare("INSERT INTO tbl_invoice_details (invoice_id, product_id, product_name, qty, price, total, t_iva, order_date) VALUES (:invid, :pid, :pname, :qty, :price, :total, :t_iva, :orderdate)");
+                        $insert->bindParam(':invid', $id);
+                        $insert->bindParam(':pid', $arr_productid[$i]);
+                        $insert->bindParam(':pname', $arr_productname[$i]);
+                        $insert->bindParam(':qty', $arr_qty[$i]);
+                        $insert->bindParam(':price', $arr_price[$i]);
+                        $insert->bindParam(':total', $arr_total[$i]);
+                        $insert->bindParam(':t_iva', $arr_t_iva[$i]);
+                        $insert->bindParam(':orderdate', $txt_order_date);
+                        $insert->execute();
+                    }
+                }
+            }
+        }
+        
+        echo "<script>alert('Atualizado com sucesso o pedido');</script>";
+        // Redirect after successful update
+        echo "<script>window.location.href='editorder?id=" . $id . "';</script>";
+        exit;
+        
+    } catch (Exception $e) {
+        // Log error and show user-friendly message
+        error_log($e->getMessage());
+        echo "<script>alert('Erro ao atualizar o pedido. Por favor, tente novamente.');</script>";
+        echo "<script>window.location.href='editorder?id=" . $id . "';</script>";
+        exit;
+    }
 }
 
+
 if (isset($_POST['btncancelar'])) {
-
-   $stmt = mysqli_query($mysqli,"UPDATE tbl_mesa SET 
-                            status='0'
-                             where cod_mesa = '$codemesa'");
-   echo ("<script>
-        alert('Obrigado, Mesa cancelado com sucesso!');          
-        </script>");
-
-    echo '<meta http-equiv="refresh" content="0; url=mesa.php">';
+    // Update mesa status
+    $stmt = mysqli_query($mysqli,"UPDATE tbl_mesa SET status='0' WHERE cod_mesa = '$codemesa'");
+    
+    if (!$stmt) {
+        echo "<script>alert('Erro ao cancelar a venda!');</script>";
+    }
+    
+    // Redirect using JavaScript to ensure it works
+    echo "<script>window.location.href='mesa';</script>";
+    exit;
 }
 
   include_once'cabecalho_user.php';   
@@ -347,7 +359,7 @@ include_once 'add_styles.php';
         <div align="center">
 
             <input type="submit" name="btnupdateorder" value="ACTUALIZAR" class="btn btn-warning">
-			<a href="add.php?id=<?php echo $id;?>&m=<?php echo $codemesa;?>"><button type="button" name="add" value="" class="btn btn-success btn-sm btnadd"><span class="glyphicon glyphicon-plus"> ADICIONAR</span></button></a>
+			<a href="add?id=<?php echo $id;?>&m=<?php echo $codemesa;?>"><button type="button" name="add" value="" class="btn btn-success btn-sm btnadd"><span class="glyphicon glyphicon-plus"> ADICIONAR</span></button></a>
         </div>
 
         <hr>
@@ -481,13 +493,22 @@ include_once 'add_styles.php';
      });
      
      $(document).on('click','.btnremove',function(){
+        var tr = $(this).closest('tr');
+        var product_id = tr.find('.productid').val();
+        var qty = tr.find('.qty').val();
 
-        $(this).closest('tr').remove(); 
+        // Remove the row from UI
+        tr.remove();
+        
+        // Recalculate totals
         calculate(0,0);
         
+        // Reset paid and due
         $("#txtpaid").val("");
         $("#txtdue").val("");
 
+        // Save changes by triggering form submit
+        $("#btnupdateorder").click();
      }) // btnremove end here  
 
 

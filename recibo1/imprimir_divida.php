@@ -17,7 +17,7 @@ $contacto_db = $res3['contacto'];
 // Criar o objeto PDF
 $pdf = new FPDF('P', 'mm', array(82, 210));
 $pdf->AddPage();
-$pdf->Image('../images/texas.png', 27, 2, 30);
+$pdf->Image('../images/logo.jpg', 27, 2, 30);
 $pdf->Ln(18);
 
 // Adicionar as informações da empresa

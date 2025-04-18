@@ -123,7 +123,7 @@ error_reporting(0);
                   <h2>'.$row->cod_mesa.'</h2>
                   <div class="icon">
                     <img src="../images/restaurant.png">
-                    <a href="start_order.php?id='.$id.'" class="small-box-footer"><i class="fa fa-arrow-circle-right"><img src="../images/icons8-shopping_cart.png">Vender</i></a>
+                    <a href="createorder?id='.$id.'" class="small-box-footer"><i class="fa fa-arrow-circle-right"><img src="../images/icons8-shopping_cart.png">Vender</i></a>
                   </div>
                   <br>
                 </div>
@@ -141,7 +141,7 @@ error_reporting(0);
                     <a href="../recibo1/conta.php?id='.$max.'" class="small-box-footer" target="_blank"><img src="../images/conta.png"> Conta</a> 
 
                   </div>
-                  <a href="editorder.php?id='.$max.'" class="small-box-footer"><i class="fa fa-arrow-circle-right"><img src="../images/icons8-shopping_cart.png"> Detalhes</i></a>
+                  <a href="editorder?id='.$max.'" class="small-box-footer"><i class="fa fa-arrow-circle-right"><img src="../images/icons8-shopping_cart.png"> Detalhes</i></a>
                 </div>
                 </div>
               </div>';

@@ -4,13 +4,13 @@
 
 // Credenciais para o banco de dados maphezu (principal)
 $db_host = "localhost";
-$db_name = "db_texas";
+$db_name = "maphezu";
 $db_user = "root";
 $db_pass = "";
 
 // Credenciais para o banco de dados tdm (usado em excel/conexao.php)
 $db_tdm_host = "localhost";
-$db_tdm_name = "db_texas";
+$db_tdm_name = "maphezu";
 $db_tdm_user = "root";
 $db_tdm_pass = "";
 

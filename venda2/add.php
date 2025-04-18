@@ -3,38 +3,44 @@ include_once '../dbconnect.php';
 include_once "../session.php";
 include_once '../conexao.php';
 include_once 'funcoes_caixa.php';
-error_reporting(1);
 
-// Obter a data do caixa aberto em vez da data atual
-$data = getDataCaixaAberto($idUser, $mysqli);
 
-//if($verifica>0){
-$mid=$_GET['id'];
-$select=$pdo->prepare("select * from tbl_mesa where cod_mesa=$mid");
+$codemesa=$_GET['m'];
+$id=$_GET['id'];
+
+// Verificar se existe um caixa aberto
+$caixa_aberto = existeCaixaAberto($idUser, $mysqli);
+if (!$caixa_aberto) {
+    echo '<script>
+    alert("É necessário abrir o caixa antes de adicionar produtos!");
+    window.location.href = "abrir_caixa.php";
+    </script>';
+    exit;
+}
+
+// Obter a data do caixa aberto
+$data_caixa = getDataCaixaAberto($idUser, $mysqli);
+
+$select=$pdo->prepare("select * from tbl_invoice where invoice_id =(select MAX(invoice_id) from tbl_invoice where invoice_id=$id)");
 $select->execute();
 $row=$select->fetch(PDO::FETCH_ASSOC);
 
-
-$codemesa=$row['cod_mesa'];
-
-$sql = mysqli_query($mysqli, "SELECT * FROM client_order_detalhes WHERE id =
-          (select MAX(id) from client_order_detalhes where id_order=$mid )");
-
-$res = mysqli_fetch_array($sql);
-$id_client_order = $res['id'];
-$nome_cliente_db = $res['nome'];
+$customer_name=$row['customer_name'];
+// Usar a data do caixa aberto em vez da data do pedido
+$order_date = $data_caixa;
+$total_anterior=$row['total'];
+$subtotal_anterior=$row['subtotal'];
 
 function fill_product($pdo){
 
     $output='';
     
-    $select=$pdo->prepare("select * from tbl_product where pstock !=0"); 
+    $select=$pdo->prepare("select * from tbl_product ORDER BY pid asc"); 
     $select->execute();
     $result=$select->fetchAll();
     
     foreach($result as $row){
 
-        //$output.='<option value="'.$row["pid"].'" >'.$row["codebar"].'</option>';
         $output.='<option value="'.$row["pid"].'">'.$row["codebar"].'-'.$row["pname"].'</option>';    
 
     }    
@@ -43,60 +49,16 @@ function fill_product($pdo){
     
 }
 
-function get_product_cards($pdo, $mysqli) {
-    $output = '';
-    
-    // Consulta para buscar todos os produtos com estoque positivo
-    $query = "SELECT * FROM tbl_product WHERE pstock > 0 ORDER BY pname";
-    $result = mysqli_query($mysqli, $query);
-    
-    if (!$result) {
-        return $output . '<div class="alert alert-danger">Erro na consulta: ' . mysqli_error($mysqli) . '</div>';
-    }
-    
-    if (mysqli_num_rows($result) > 0) {
-        $output .= '<div class="row product-cards-container">';
-        
-        while ($product = mysqli_fetch_assoc($result)) {
-            // Obter valores dos campos
-            $pid = isset($product['pid']) ? $product['pid'] : '';
-            $pname = isset($product['pname']) ? $product['pname'] : 'Produto';
-            $price = isset($product['saleprice']) ? $product['saleprice'] : 0;
-            $stock = isset($product['pstock']) ? $product['pstock'] : 0;
-            $category = isset($product['pcategory']) ? $product['pcategory'] : 'Sem Categoria';
-            $iva = isset($product['iva']) ? $product['iva'] : '16';
-            
-            // Criar card do produto
-            $output .= '<div class="col-md-2 col-sm-2 col-xs-6">'
-                     . '<div class="product-card" '
-                     . 'data-id="' . $pid . '" '
-                     . 'data-name="' . htmlspecialchars($pname, ENT_QUOTES) . '" '
-                     . 'data-price="' . $price . '" '
-                     . 'data-stock="' . $stock . '" '
-                     . 'data-category="' . htmlspecialchars($category, ENT_QUOTES) . '" '
-                     . 'data-iva="' . $iva . '">'
-                     . '<div class="product-name">' . $pname . '</div>'
-                     . '<div class="product-price">' . number_format($price, 2) . ' MT</div>'
-                     . '<div class="product-stock">Stock: ' . $stock . '</div>'
-                     . '<button type="button" class="btn btn-success btn-sm btn-add-product">Adicionar</button>'
-                     . '</div>'
-                     . '</div>';
-        }
-        
-        $output .= '</div>';
-    } else {
-        $output .= '<div class="alert alert-warning">Não foram encontrados produtos com estoque disponível!</div>';
-    }
-    
-    return $output;
-}
-
 
 if(isset($_POST['btnsaveorder'])){
 
     $customer_name=$_POST['txtcustomer'];
     // Usar a data do caixa aberto em vez da data do formulário
-    $order_date = $data;
+    $order_date = getDataCaixaAberto($idUser, $mysqli);
+    //$total          =$_POST['txttotal'];
+    $subtotal       =$_POST['txt_subtotal'];
+    $totalacumulado =$_POST['totalacumulado'];
+    $subtotalacumulado =$_POST['totalacumulado2'];
     $total=$_POST['txttotal'];
     $sub_total=$_POST['txt_subtotal'];
 
@@ -117,45 +79,25 @@ if(isset($_POST['btnsaveorder'])){
     $arr_qty=$_POST['qty'];
     $arr_price=$_POST['price'];
     $arr_total=$_POST['total'];
-    $arr_cate=$_POST['categaria'];
+    //$arr_cate=$_POST['categaria'];
     //$arr_t_sub=$_POST['Subtotal'];
     $arr_t_iva=$_POST['totaliva'];
 
-    if($mid==55){
-        $insert_mesa=$pdo->prepare("UPDATE tbl_mesa SET status=:estado where cod_mesa=$mid");
-    $insert_mesa->bindParam(":estado",$mesa1);
+    //actualiza a tabela
+    $soma=$total+$totalacumulado;
+    $somasub=$subtotal+$subtotalacumulado;
+
+    $insert_mesa=$pdo->prepare("UPDATE tbl_invoice SET total=:total,subtotal=:subtotal where invoice_id=$id");
+    $insert_mesa->bindParam(":total",$soma);
+    $insert_mesa->bindParam(":subtotal",$somasub);
     $insert_mesa->execute();
     
-    $insert=$pdo->prepare("insert into tbl_invoice(mesa,customer_name,order_date,subtotal,total,user)values(:mesa,:cust,:orderdate,:subtotal,:total,:user)");
-    $insert->bindParam(':cust',$customer_name);
-    $insert->bindParam(':orderdate',$order_date);
-    $insert->bindParam(':total',$total);
-    $insert->bindParam(':mesa',$mid);
-    $insert->bindParam(':subtotal',$sub_total);
-     $insert->bindParam(':user',$idUser);
-    //$insert->bindParam(':iva',$iva);
-    $insert->execute();
-    }else{
-    $insert_mesa=$pdo->prepare("UPDATE tbl_mesa SET status=:estado where cod_mesa=$mid");
-    $insert_mesa->bindParam(":estado",$mesa1);
-    $insert_mesa->execute();
     
-    $insert=$pdo->prepare("insert into tbl_invoice(mesa,customer_name,order_date,subtotal,total,user)values(:mesa,:cust,:orderdate,:subtotal,:total,:user)");
-    $insert->bindParam(':cust',$customer_name);
-    $insert->bindParam(':orderdate',$order_date);
-    $insert->bindParam(':total',$total);
-    $insert->bindParam(':mesa',$mesa);
-    $insert->bindParam(':subtotal',$sub_total);
-     $insert->bindParam(':user',$idUser);
-    //$insert->bindParam(':iva',$iva);
-    $insert->execute();
-
-
-    }
+      
     
     //2nd  insert query for tbl_invoice_details
-    $invoice_id=$pdo->lastInsertId();
-    if($invoice_id!=null){
+    //$invoice_id=$pdo->lastInsertId();
+    if($id!=null){
                 
         for($i=0 ; $i<count($arr_productid) ; $i++){
 
@@ -174,17 +116,12 @@ if(isset($_POST['btnsaveorder'])){
              $update->execute();
 
          //}
-
-    //update detalhes da conta onde fica o nome e id invoice
-     $stmt = mysqli_query($mysqli,"UPDATE client_order_detalhes SET 
-                                invoice_id='$invoice_id' 
-                                 where id = '$id_client_order'");         
          
 
 
          $insert=$pdo->prepare("insert into tbl_invoice_details(invoice_id,product_id,product_name,qty,price,total,t_iva,order_date) values(:invid,:pid,:pname,:qty,:price,:total,:t_iva,:orderdate)");
 
-         $insert->bindParam(':invid',$invoice_id);
+         $insert->bindParam(':invid',$id);
          $insert->bindParam(':pid', $arr_productid[$i]);
          $insert->bindParam(':pname',$arr_productname[$i]);
          $insert->bindParam(':qty',$arr_qty[$i]);
@@ -192,10 +129,7 @@ if(isset($_POST['btnsaveorder'])){
          $insert->bindParam(':total',$arr_total[$i]);
          $insert->bindParam(':orderdate',$order_date);
          //$insert->bindParam(':t_sub',$arr_t_sub[$i]);
-         // Verificar se o valor de IVA é válido, se não for, definir como 0
-         $iva_value = isset($arr_t_iva[$i]) && is_numeric($arr_t_iva[$i]) ? $arr_t_iva[$i] : 0;
-         $insert->bindParam(':t_iva', $iva_value);
-        
+         $insert->bindParam(':t_iva',$arr_t_iva[$i]);
 
 
          //$insert->bindParam(":cate",$arr_cate[$i]);
@@ -204,122 +138,32 @@ if(isset($_POST['btnsaveorder'])){
 
      }        
    //  echo"success fully created order";    
-     //Balcao o seu codigo é 55
-   if($mid==55){
-        //echo "Hello";
-   // <a href="pagar.php?id='.$id.'&op=det&max='.$max.'" class="small-box-footer"><img src="../images/icons8-request_money.png"> '.$rows->total.' MT</a>
-    header('location:pagar.php?id=55&op=det&max=0'.$invoice_id.'');
-   }else{
-        header('location:mesa.php');     
-   }
-     
+     header('location:mesa.php');     
  }
 
+
 }
+
+
 
   include_once 'cabecalho_user.php';   
 
 ?>
-<!-- Estilos para os cards de produtos -->
-<style>
-    .product-category {
-        margin-bottom: 20px;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 10px;
-    }
-    
-    .product-category h4 {
-        background-color: #f4f4f4;
-        padding: 8px 15px;
-        border-radius: 4px;
-        margin-bottom: 15px;
-        color: #333;
-    }
-    .product-card {
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        padding: 5px;
-        margin-bottom: 15px;
-        background-color: #fff;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        transition: transform 0.2s;
-        cursor: pointer;
-        height: 120px;
-    }
-    .product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        border-color: #3498db;
-    }
-    .product-name {
-        font-weight: bold;
-        margin-bottom: 5px;
-        height: 19px;
-        overflow: hidden;
-        font-size: 14px;
-    }
-    .product-price {
-        color: #e74c3c;
-        font-size: 16px;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-    .product-stock {
-        color: #7f8c8d;
-        font-size: 12px;
-        margin-bottom: 10px;
-    }
-    .btn-add-product {
-        width: 100%;
-        background-color: #27ae60;
-        border-color: #27ae60;
-    }
-    .btn-add-product:hover {
-        background-color: #2ecc71;
-        border-color: #2ecc71;
-    }
-    .product-cards-container {
-        margin-bottom: 10px;
-    }
-    /* Destacar produtos na tabela */
-    #producttable tbody tr:hover {
-        background-color: #f5f5f5;
-    }
-    /* Estilo para os painéis */
-    .panel-primary > .panel-heading {
-        background-color: #3498db;
-        color: white;
-    }
-    .panel-success > .panel-heading {
-        background-color: #27ae60;
-        color: white;
-    }
-    .panel-body {
-        padding: 10px;
-    }
-    .panel {
-        border-radius: 4px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        margin-bottom: 20px;
-    }
-    /* Responsividade para telas menores */
-    @media (max-width: 768px) {
-        .col-xs-6 {
-            width: 50%;
-        }
-    }
-</style>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Caixa <img src="../images/icons8-shopping_cart.png"> <?php echo $codemesa; ?> 
+            Adicionar Produtos a Venda MESA: <?php  echo $codemesa; ?>
             <small></small>
-            Nome do cliente: <?php echo $mid; ?>
         </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> SIVAERP</a></li>
+            <li class="active">SIVAERP</li>
+        </ol>
         <div class="row" style="margin-top: 15px;">
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="info-box bg-yellow">
                     <span class="info-box-icon"><i class="fa fa-percent"></i></span>
                     <div class="info-box-content">
@@ -328,7 +172,7 @@ if(isset($_POST['btnsaveorder'])){
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="info-box bg-green">
                     <span class="info-box-icon"><i class="fa fa-calculator"></i></span>
                     <div class="info-box-content">
@@ -337,7 +181,7 @@ if(isset($_POST['btnsaveorder'])){
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="info-box bg-blue">
                     <span class="info-box-icon"><i class="fa fa-money"></i></span>
                     <div class="info-box-content">
@@ -346,36 +190,142 @@ if(isset($_POST['btnsaveorder'])){
                     </div>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="info-box bg-gray">
+                    <span class="info-box-icon"><i class="fa fa-history"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Subtotal anterior</span>
+                        <span class="info-box-number"><?php echo $subtotal_anterior?> MT</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="info-box bg-gray">
+                    <span class="info-box-icon"><i class="fa fa-history"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Total anterior</span>
+                        <span class="info-box-number"><?php echo $total_anterior?> MT</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+
     <!-- Main content -->
     <section class="content container-fluid">
-        <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
+        <!-- Estilos para os cards de produtos -->
+        <style>
+            /* Estilos para os cards de produtos */
+            .product-card {
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                padding: 5px;
+                margin-bottom: 15px;
+                background-color: #fff;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                transition: transform 0.2s;
+                cursor: pointer;
+                height: 120px;
+            }
+            .product-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                border-color: #3498db;
+            }
+            .product-name {
+                font-weight: bold;
+                margin-bottom: 5px;
+                height: 19px;
+                overflow: hidden;
+                font-size: 14px;
+            }
+            .product-price {
+                color: #e74c3c;
+                font-size: 16px;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+            .product-stock {
+                color: #7f8c8d;
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+            .btn-add-product {
+                width: 100%;
+                background-color: #27ae60;
+                border-color: #27ae60;
+            }
+            .btn-add-product:hover {
+                background-color: #2ecc71;
+                border-color: #2ecc71;
+            }
+            .product-cards-container {
+                margin-bottom: 10px;
+            }
+            /* Destacar produtos na tabela */
+            #producttable tbody tr:hover {
+                background-color: #f5f5f5;
+            }
+            /* Estilo para os painéis */
+            .panel-primary > .panel-heading {
+                background-color: #3498db;
+                color: white;
+            }
+            .panel-success > .panel-heading {
+                background-color: #27ae60;
+                color: white;
+            }
+            .panel-body {
+                padding: 10px;
+            }
+            .panel {
+                border-radius: 4px;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+                margin-bottom: 20px;
+            }
+        </style>
+
         <div class="box box-warning">
-            <form action="" method="post" name="">
-
-                <!-- <div class="box-header with-border">
-                    <small>Clique nos cards de produtos para adicionar ao pedido</small>
-                </div> -->
-                <!-- /.box-header -->
-                <!-- form start -->
-                <input type="hidden" name="txt_mesa" value="<?php echo $codemesa; ?>">
+            <form action="" method="post">
+               
                 <div class="box-body">
-
-                    <!--MIZ-->
-                    <div class="col-md-6">
-                        <div class="form-group">                       
-                            <div class="input-group">
-                                <input type="hidden" class="form-control" name="txtcustomer" value="<?php echo $Nome;?>" required>
-                                <input type="hidden" class="form-control pull-right" id="datepicker" name="orderdate" value="<?php echo date("Y-m-d");?>" data-date-format="yyyy-mm-dd" >
-                                <input type="hidden" class="form-control pull-right" id="datepicker" name="txtmesa" value="1">
+                    <div class="row">
+                        <div class="col-md-6" hidden>
+                            <div class="form-group">
+                                <label>Nome do Cliente</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input type="text" class="form-control" name="txtcustomer" value="<?php echo $customer_name;?>" required>
+                                </div>
+                            </div>
+                            <div class="form-group" hidden>
+                                <label>Data</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control" name="orderdate" value="<?php echo $order_date;?>" required readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" hidden>
+                                <label>Mesa</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-table"></i>
+                                    </div>
+                                    <input type="text" class="form-control" name="txt_mesa" value="<?php echo $codemesa;?>" readonly>
+                                    <input type="hidden" class="form-control" name="txtmesa" value="<?php echo $codemesa;?>" readonly>
+                                    <input type="hidden" class="form-control" name="totalacumulado" value="<?php echo $total_anterior;?>" readonly>
+                                    <input type="hidden" class="form-control" name="totalacumulado2" value="<?php echo $subtotal_anterior;?>" readonly>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div> <!-- this is for customer and date -->
-                <div class="box-body">
+                    
                     <!-- Layout de duas colunas -->
                     <div class="row">
                         <div class="col-md-6">
@@ -486,8 +436,6 @@ if(isset($_POST['btnsaveorder'])){
                                                 <tr>
                                                     <th width="5px">Ação</th>
                                                     <th>Produto</th>
-                                                    <!-- <th>Categoria</th> -->
-                                                    <!-- <th>Iva</th> -->
                                                     <th>Stock</th>
                                                     <th>Preço</th>
                                                     <th>Quantidade</th>
@@ -496,64 +444,80 @@ if(isset($_POST['btnsaveorder'])){
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <!-- Itens adicionados aparecerão aqui -->
+                                                <!-- Os produtos serão adicionados aqui através dos cards -->
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div><!-- this for table -->
-
-                <div class="box-body">
-                    <div class="col-md-6">
-                        <!-- Espaço para informações adicionais no lado esquerdo se necessário -->
                     </div>
-                    <div class="col-md-6" id="corpo" hidden>
-                        <div class="form-group">
-                            <label>Iva (16%)</label>
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                   MT
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6" id="corpo">
+                            <div class="form-group " hidden>
+                                <label>Iva (17%)</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                       MT
+                                    </div>
+                                    <input type="text" class="form-control txtiva" name="txtiva" id="txtiva" required readonly>
                                 </div>
-                                <input type="text" class="form-control txtiva" name="txtiva" id="txtiva" required readonly>
+                            </div>
+                            <div class="form-group" style="background-color: seagreen; padding: 1px;" hidden>
+                                <label>Subtotal actual</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-usd"></i>
+                                    </div>
+                                    <input type="text" class="form-control" name="txt_subtotal" id="txt_subtotal" required readonly>
+                                </div>
+                            </div>
+                            <div class="form-group" style="background-color: seagreen; padding: 1px;" hidden>
+                                <label>Total actual</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-usd"></i>
+                                    </div>
+                                    <input type="text" class="form-control" name="txttotal" id="txttotal" required readonly>
+                                </div>
+                            </div>
+                            <div class="form-group "style="background-color: gray; padding: 1px;" hidden>
+                                <label>Subtotal anterior</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-usd"></i>
+                                    </div>
+                                    <input type="text" class="form-control" name="totalacumulado2" id="totalacumulado2" value="<?php echo $subtotal_anterior?>" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group" style="background-color: gray; padding: 1px;" hidden>
+                                <label>Total anterior</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-usd"></i>
+                                    </div>
+                                    <input type="text" class="form-control" name="totalacumulado" id="totalacumulado" value="<?php echo $total_anterior?>" readonly>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Subtotal </label>
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    MT
-                                </div>
-                                <input type="text" class="form-control" name="txt_subtotal" required readonly id="txt_subtotal">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Total</label>
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    MT
-                                </div>
-                                <input type="number" class="form-control" name="txttotal" id="txttotal" required readonly>
-                            </div>
-                        </div>
-                   
-                 
-                </div>
-            </div><!-- tax dis. etc -->
-            <hr>
-            <div align="center">
-                <input type="submit" name="btnsaveorder" value="Processar" class="btn btn-info">
+                    </div>
+                    <hr>
+                    <div align="center">
+                        <input type="submit" name="btnsaveorder" value="Processar" class="btn btn-info">
+                    </div>
+                    <hr>
+                </form>
             </div>
-            <hr>
-        </form>
-    </div>
-</section>
-<!-- /.content -->
+        </div>
+    </section>
+    <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<script>
 
+<script>
 
     //Date picker
     $('#datepicker').datepicker({
@@ -567,9 +531,10 @@ if(isset($_POST['btnsaveorder'])){
         radioClass: 'iradio_minimal-red'
     })
     
-    
-    
     $(document).ready(function(){
+        // Inicializar os valores no cabeçalho quando a página carrega
+        calculate(0,0);
+        
         // Variáveis para controle de paginação
         var currentPage = 1;
         var totalPages = $(".product-pagination").length > 0 ? parseInt($(".pagination-info").text().split(" de ")[1]) : 1;
@@ -638,7 +603,6 @@ if(isset($_POST['btnsaveorder'])){
                 var productName = productCard.data('name');
                 var productPrice = productCard.data('price');
                 var productStock = productCard.data('stock');
-                var productCategory = productCard.data('category');
                 var productIva = productCard.data('iva');
                 
                 console.log('Clicou no produto:', productName, 'ID:', productId, 'Preço:', productPrice);
@@ -678,8 +642,6 @@ if(isset($_POST['btnsaveorder'])){
                     html += '<tr>';
                     html += '<td><center><button type="button" name="remove" class="btn btn-danger btn-sm btnremove"><span class="glyphicon glyphicon-remove"></span></button></center></td>';
                     html += '<td>' + productName + '<input type="hidden" class="form-control pname" name="productname[]" value="' + productName + '" readonly><input type="hidden" class="productid" name="productid[]" value="' + productId + '"></td>';
-                    // html += '<td><input type="text" class="form-control forma" name="forma[]" value="' + productCategory + '" readonly></td>';
-                    // html += '<td><input type="text" class="form-control txtivas" name="iva[]" value="' + productIva + '" readonly id="txt_txtivas"></td>';
                     html += '<td><input type="number" class="form-control stock" name="stock[]" value="' + productStock + '" readonly></td>';
                     html += '<td><input type="text" class="form-control price" name="price[]" value="' + productPrice + '" readonly id="txt_price"></td>';
                     html += '<td><input type="number" min="1" max="' + productStock + '" class="form-control qty" name="qty[]" value="1"></td>';
@@ -696,77 +658,129 @@ if(isset($_POST['btnsaveorder'])){
             }
         });
         
-        // Inicializar os valores no cabeçalho quando a página carrega
-        $(document).ready(function() {
-            calculate(0,0);
-        });
+        // Manter o suporte ao botão de adicionar para compatibilidade
+        $(document).on('click','.btnadd',function(){
+            var html='';
+            html+='<tr>'; 
+            html+='<td><center><button type="button" name="remove" class="btn btn-danger btn-sm btnremove"><span class="glyphicon glyphicon-remove"></span></button></center></td>'; 
+            // html+='<td><select class="form-control productid" name="productid[]" style="width: 250px";><option value="">Select Option</option><?php echo fill_product($pdo); ?> </select></td>';
+            html+='<td><input type="number" class="form-control stock" name="stock[]" readonly></td>';
+            html+='<td><input type="text" class="form-control price" name="price[]" readonly id="txt_price"></td>';
+            html+='<td><input type="number" min="1" class="form-control qty" name="qty[]"></td>';
+            html+='<td><input type="text" class="form-control total" name="total[]" readonly></td>';
+            html+='<td class="hidden"><input type="number" class="form-control totaliva" name="totaliva[]" readonly></td>';
+            $('#producttable').append(html);
+
+            //Initialize Select2 Elements
+            $('.productid').select2()
+
+            $(".productid").on('change' , function(e){
+                var productid = this.value;
+                var tr=$(this).parent().parent();  
+                $.ajax({
+                    url:"getproduct.php",
+                    method:"get",
+                    data:{id:productid},
+                    success:function(data){
+                        tr.find(".pname").val(data["pname"]);
+                        tr.find(".stock").val(data["pstock"]);
+                        tr.find(".price").val(data["saleprice"]);
+                        tr.find(".qty").val(1);
+                        tr.find(".total").val( tr.find(".qty").val() *  tr.find(".price").val()); 
+
+                        //iva de cada produto
+                        tr.find('.totaliva').val( tr.find(".txtivas").val() * tr.find(".total").val());
+
+                        calculate(0,0);
+                    }   
+                })   
+            })    
+        }) // btnadd end here    
+
         
-        // Remover produto da tabela
         $(document).on('click','.btnremove',function(){
+
             $(this).closest('tr').remove(); 
             calculate(0,0);
-        });
+            $("#txtpaid").val(0);
+         
+             calculate(0,0);
+
+     }) // btnremove end here  
         
-        // Atualizar valores quando a quantidade mudar
-        $(document).on('change keyup', '.qty', function(){
-            var quantity = $(this);
-            var tr = $(this).parent().parent(); 
-            
-            if((quantity.val()-0) > (tr.find(".stock").val()-0)){
-                alert("A quantidade a ser vendida não se encontra disponível no Stock");
-                quantity.val(1);
-            }
-            
-            tr.find(".total").val(quantity.val() * tr.find(".price").val());
-            tr.find('.totaliva').val(tr.find(".txtivas").val() * tr.find(".total").val() / 100);
-            calculate(0,0);
-        });
 
-    // Fim do document.ready
+       $("#producttable").delegate(".qty","keyup change" ,function(){
 
+          var quantity = $(this);
+          var tr = $(this).parent().parent(); 
 
-// Atualizar valores quando a quantidade mudar no delegate
-$(document).ready(function() {
-    $("#producttable").delegate(".qty", "keyup change", function() {
-        var quantity = $(this);
-        var tr = $(this).parent().parent(); 
+        // //quantity.val(0);        
+        // tr.find(".total").val(quantity.val() *  tr.find(".price").val());
 
-        if((quantity.val()-0) > (tr.find(".stock").val()-0)) {
-            alert("A quantidade a ser vendida não se encontra disponível no Stock");
-            quantity.val(1);
-        }
+       
+        // //total com iva
+        // //Number(tr.find('.Subtotal').val(Number(tr.find(".total").val())+Number(tr.find(".totaliva").val())));
+        // tr.find('.totaliva').val( tr.find(".txtivas").val() * tr.find(".total").val());
         
-        tr.find(".total").val(quantity.val() * tr.find(".price").val());
-        tr.find('.totaliva').val(tr.find(".txtivas").val() * tr.find(".total").val() / 100);
+        //iva combrado
+        //tr.find('.totaliva').val(tr.find(".txtivas").val()*Number.parseFloat(tr.find(".total").val()));
+
+        //$('#txt_subtotal').val(parseFloat(tr.find(".total").val())+parseFloat(tr.find(".totaliva").val()));
+
+        //calculate(0,0);
+        if((quantity.val()-0)>(tr.find(".stock").val()-0) ){
+       
+       //swal.fire("WARNING!","SORRY! This much of quantity is not available","warning");
+        alert("A quantidade a ser vendida não se encontra disponivel no Stock");
+        quantity.val(1);
+        
+         
+        tr.find(".total").val(quantity.val() *  tr.find(".price").val());
+
+        //total com iva
+        tr.find('.totaliva').val( tr.find(".txtivas").val() * tr.find(".total").val());
         calculate(0,0);
-    });
-});
+       }else{
+
+
+        tr.find(".total").val(quantity.val() *  tr.find(".price").val());
+
+        //total com iva
+        tr.find('.totaliva').val( tr.find(".txtivas").val() * tr.find(".total").val());
+        calculate(0,0);
+       }    
+                
+        
+    }) 
 
         
         function calculate(dis,paid){
-            var subtotal=0;     
-            var iva=0;     
-            var discount = dis;        
-            var net_total=0;     
-            var paid_amt=paid;     
-            var due=0;     
+            var subtotal=0;
+            var iva=0;
+            var discount = dis;     
+            var net_total=0;
+            var paid_amt=paid;
+            var due=0;
             
+            // Calcular o subtotal somando todos os valores da coluna total
             $(".total").each(function(){
-                subtotal = subtotal+($(this).val()*1);     
-            })
+                subtotal = parseFloat(subtotal) + parseFloat($(this).val() || 0); 
+            });
             
+            // Calcular o total de IVA somando todos os valores da coluna totaliva
             $(".totaliva").each(function(){
-                iva = iva+($(this).val()*1);     
-            })
+                iva = parseFloat(iva) + parseFloat($(this).val() || 0);
+            });
             
-            net_total=subtotal+iva;
-            net_total=net_total-discount;      
-            due=net_total-paid_amt;      
-            
+            // Calcular o total geral
+            net_total = subtotal + iva;
+            net_total = net_total - discount;   
+            due = net_total - paid_amt;
+
             // Atualizar os campos do formulário
             $("#txt_subtotal").val(subtotal.toFixed(2)); 
-            $("#txtdiscount").val(discount);
             $("#txttotal").val(net_total.toFixed(2));
+            $("#txtdiscount").val(discount);
             $("#txtdue").val(due.toFixed(2));
             $("#txtiva").val(iva.toFixed(2));
             
@@ -774,7 +788,7 @@ $(document).ready(function() {
             $("#header-iva").text(iva.toFixed(2) + " MT");
             $("#header-subtotal").text(subtotal.toFixed(2) + " MT");
             $("#header-total").text(net_total.toFixed(2) + " MT");
-        }
+     }// function calculate end here 
      
 
      
@@ -801,16 +815,6 @@ $(document).ready(function() {
 
 
 <?php
-
-// Verificar se existe um caixa aberto antes de permitir criar pedidos
-$caixa_aberto = existeCaixaAberto($idUser, $mysqli);
-if (!$caixa_aberto) {
-    echo '<script>
-    alert("É necessário abrir o caixa antes de realizar vendas!");
-    window.location.href = "abrir_caixa.php";
-    </script>';
-    exit;
-}
 
 include_once 'footer.php';
 /*}else{

@@ -51,10 +51,11 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
 <script src="../bower_components/select2/dist/js/select2.full.min.js"></script>  
 <link rel="shortcut icon" href="../siva.ico">     
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<!-- <body class="hold-transition skin-blue sidebar-mini sidebar-collapse"> -->
+<body class="hold-transition skin-blue sidebar-mini-expand-feature sidebar-collapse">
   <div class="wrapper">
     <header class="main-header">
-      <a href="mesa.php" class="logo">
+      <a href="mesa" class="logo">
        <span class="logo-mini"><b>SI</b>VA</span>
         <span class="logo-lg"><b><?php echo $nome_db; ?></span>
       </a>
@@ -82,10 +83,10 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
                 </li>
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="changepassword.php" class="btn btn-default btn-flat">Alterar Senha</a>
+                    <a href="changepassword" class="btn btn-default btn-flat">Alterar Senha</a>
                   </div>
                   <div class="pull-right">
-                    <a href="../logout.php" class="btn btn-default btn-flat">Sair</a>
+                    <a href="../logout" class="btn btn-default btn-flat">Sair</a>
                   </div>
                 </li>
               </ul>
@@ -109,14 +110,14 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
       <section class="sidebar">
 
         <ul class="sidebar-menu" data-widget="tree">
-          <li><a href="abrir_caixa.php"><img src="../images/icons8-cash_register_45.png"></i> <span>Caixa</span></a></li> 
+          <li><a href="abrir_caixa"><img src="../images/icons8-cash_register_45.png"></i> <span>Caixa</span></a></li> 
 
-          <li><a href="mesa.php"><img src="../images/restaurant.png" width="40px"></i> <span>Mesa</span></a></li> 
-          <li><a href="ajust_list.php"><img src="../images/warning.png" width="40px" title="Registar Quebras"></i> <span>Ajuste</span></a></li> 
-          <!-- <li><a href="balcao.php?id=55"><img src="../images/icons8-add.png" width="30px"></i> <span>Balcão</span></a></li> 
+          <li><a href="mesa"><img src="../images/restaurant.png" width="40px"></i> <span>Mesa</span></a></li> 
+          <li><a href="ajust_list"><img src="../images/warning.png" width="40px" title="Registar Quebras"></i> <span>Ajuste</span></a></li> 
+          <!-- <li><a href="balcao?id=55"><img src="../images/icons8-add.png" width="30px"></i> <span>Balcão</span></a></li> 
             -->
             <li>
-            <form action="balcao.php" method="POST" style="display: inline;">
+            <form action="balcao" method="POST" style="display: inline;">
                 <input type="hidden" name="txtnome" value="55"> 
                 <input type="hidden" name="id" value="55">
                 <button type="submit" style="background: none; border: none; cursor: pointer;">
@@ -136,8 +137,8 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
           </a>
 
           <ul class="treeview-menu">
-          <li><a href="diario.php"><i class="fa fa-calendar"></i> <span>Diario</span></a>
-          <li><a href="acesso_rela.php"><i class="fa fa-user"></i> <span>Acesso</span></a>
+          <li><a href="diario"><i class="fa fa-calendar"></i> <span>Diario</span></a>
+          <li><a href="acesso_rela"><i class="fa fa-user"></i> <span>Acesso</span></a>
         </li>
       </ul>
 

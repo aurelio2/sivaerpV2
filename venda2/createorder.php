@@ -9,20 +9,45 @@ error_reporting(1);
 $data = getDataCaixaAberto($idUser, $mysqli);
 
 //if($verifica>0){
-$mid=$_GET['id'];
-$select=$pdo->prepare("select * from tbl_mesa where cod_mesa=$mid");
+// Recebendo o ID da mesa com tratamento de segurança
+$mid = isset($_GET['id']) ? $_GET['id'] : '';
+
+// Forçando valor numérico para $mid
+if (!is_numeric($mid)) {
+    // Balcao Geral ou outro valor não numérico = 55
+    $mid_numerico = 55;
+    $is_balcao = true;
+} else {
+    // É um valor numérico
+    $mid_numerico = intval($mid); // Garantindo que é inteiro
+    $is_balcao = ($mid_numerico == 55);
+}
+
+// Proteção extra na consulta SQL usando prepared statement completo
+$select = $pdo->prepare("SELECT * FROM tbl_mesa WHERE cod_mesa = ?");
+$select->bindParam(1, $mid_numerico, PDO::PARAM_INT); // Forçando tipo inteiro
 $select->execute();
-$row=$select->fetch(PDO::FETCH_ASSOC);
+$row = $select->fetch(PDO::FETCH_ASSOC);
 
+// Definir $codemesa como valor numérico
+if (isset($row['cod_mesa']) && is_numeric($row['cod_mesa'])) {
+    $codemesa = intval($row['cod_mesa']); // Garantindo que é inteiro
+} else {
+    $codemesa = 55; // Padrão para Balcao Geral se não encontrou ou não é numérico
+}
 
-$codemesa=$row['cod_mesa'];
+// Consulta segura para client_order_detalhes
+$query = "SELECT * FROM client_order_detalhes WHERE id = 
+          (SELECT MAX(id) FROM client_order_detalhes WHERE id_order = ?)";
+$stmt = mysqli_prepare($mysqli, $query);
+mysqli_stmt_bind_param($stmt, 'i', $mid_numerico); // 'i' = inteiro
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$res = mysqli_fetch_array($result);
 
-$sql = mysqli_query($mysqli, "SELECT * FROM client_order_detalhes WHERE id =
-          (select MAX(id) from client_order_detalhes where id_order=$mid )");
-
-$res = mysqli_fetch_array($sql);
-$id_client_order = $res['id'];
-$nome_cliente_db = $res['nome'];
+// Variáveis com os dados do resultado da consulta
+$id_client_order = isset($res['id']) ? $res['id'] : 0;
+$nome_cliente_db = isset($res['nome']) ? $res['nome'] : '';
 
 function fill_product($pdo){
 
@@ -104,60 +129,78 @@ if(isset($_POST['btnsaveorder'])){
     //$due=$_POST['txtdue'];
     //$payment_type=$_POST['rb'];
 
-    //mesa
-    $mesa=$_POST['txt_mesa'];
-    $mesa1=$_POST['txtmesa'];
+    //mesa - com tratamento seguro para valores não numéricos
+    $mesa_original = isset($_POST['txt_mesa']) ? $_POST['txt_mesa'] : '';
+    
+    // Garantir que $mesa seja sempre um valor inteiro
+    // 'Balcao Geral' ou qualquer texto = 55
+    // Qualquer outro valor numérico será convertido para inteiro
+    $mesa = (!is_numeric($mesa_original)) ? 55 : intval($mesa_original);
+    
+    // Mesmo tratamento para $mesa1 (status da mesa)
+    $mesa1_original = isset($_POST['txtmesa']) ? $_POST['txtmesa'] : '';
+    $mesa1 = (!is_numeric($mesa1_original)) ? 1 : intval($mesa1_original);
+    
     //$iva=$_POST['txtiva'];
 
     ////////////////////////////////
     
-    $arr_productid=$_POST['productid'];
-    $arr_productname=$_POST['productname'];
-    $arr_stock=$_POST['stock'];
-    $arr_qty=$_POST['qty'];
-    $arr_price=$_POST['price'];
-    $arr_total=$_POST['total'];
-    $arr_cate=$_POST['categaria'];
-    //$arr_t_sub=$_POST['Subtotal'];
-    $arr_t_iva=$_POST['totaliva'];
+    // Verificação segura para os arrays - evita erros quando não existirem
+    $arr_productid = isset($_POST['productid']) ? $_POST['productid'] : [];
+    $arr_productname = isset($_POST['productname']) ? $_POST['productname'] : [];
+    $arr_stock = isset($_POST['stock']) ? $_POST['stock'] : [];
+    $arr_qty = isset($_POST['qty']) ? $_POST['qty'] : [];
+    $arr_price = isset($_POST['price']) ? $_POST['price'] : [];
+    $arr_total = isset($_POST['total']) ? $_POST['total'] : [];
+    $arr_cate = isset($_POST['categaria']) ? $_POST['categaria'] : [];
+    //$arr_t_sub = isset($_POST['Subtotal']) ? $_POST['Subtotal'] : [];
+    $arr_t_iva = isset($_POST['totaliva']) ? $_POST['totaliva'] : [];
 
-    if($mid==55){
-        $insert_mesa=$pdo->prepare("UPDATE tbl_mesa SET status=:estado where cod_mesa=$mid");
-    $insert_mesa->bindParam(":estado",$mesa1);
-    $insert_mesa->execute();
+    // Independentemente se é Balcao Geral ou outra mesa, usamos a mesma lógica
+    // com tratamento seguro para todos os parâmetros
     
-    $insert=$pdo->prepare("insert into tbl_invoice(mesa,customer_name,order_date,subtotal,total,user)values(:mesa,:cust,:orderdate,:subtotal,:total,:user)");
-    $insert->bindParam(':cust',$customer_name);
-    $insert->bindParam(':orderdate',$order_date);
-    $insert->bindParam(':total',$total);
-    $insert->bindParam(':mesa',$mid);
-    $insert->bindParam(':subtotal',$sub_total);
-     $insert->bindParam(':user',$idUser);
-    //$insert->bindParam(':iva',$iva);
-    $insert->execute();
-    }else{
-    $insert_mesa=$pdo->prepare("UPDATE tbl_mesa SET status=:estado where cod_mesa=$mid");
-    $insert_mesa->bindParam(":estado",$mesa1);
-    $insert_mesa->execute();
+    // 1. Atualizar status da mesa - APENAS se NÃO for Balcao Geral (55)
+    if (!$is_balcao && $mid_numerico != 55) {
+        $insert_mesa = $pdo->prepare("UPDATE tbl_mesa SET status = ? WHERE cod_mesa = ?");
+        $insert_mesa->bindParam(1, $mesa1, PDO::PARAM_INT);  // Garante que é inteiro
+        $insert_mesa->bindParam(2, $mid_numerico, PDO::PARAM_INT);  // Garante que é inteiro
+        $insert_mesa->execute();
+    }
+    // Para Balcao Geral, pula esta etapa e vai direto para a inserção na fatura
     
-    $insert=$pdo->prepare("insert into tbl_invoice(mesa,customer_name,order_date,subtotal,total,user)values(:mesa,:cust,:orderdate,:subtotal,:total,:user)");
-    $insert->bindParam(':cust',$customer_name);
-    $insert->bindParam(':orderdate',$order_date);
-    $insert->bindParam(':total',$total);
-    $insert->bindParam(':mesa',$mesa);
-    $insert->bindParam(':subtotal',$sub_total);
-     $insert->bindParam(':user',$idUser);
-    //$insert->bindParam(':iva',$iva);
+    // 2. Determinar qual valor numérico usar para o campo mesa
+    // Se for Balcão Geral, sempre usa 55
+    // Se for outra mesa, usa o valor correspondente
+    $mesa_valor = ($is_balcao || $mesa == 55) ? 55 : intval($mesa);
+    
+    // 3. Inserir na tabela invoice com valores seguros, usando bindParam com tipos de dados
+    $insert = $pdo->prepare("INSERT INTO tbl_invoice(mesa, customer_name, order_date, subtotal, total, user) 
+                         VALUES (?, ?, ?, ?, ?, ?)");
+    
+    // Bind todos os parâmetros com tipos específicos
+    $insert->bindParam(1, $mesa_valor, PDO::PARAM_INT);  // DECIMAL = inteiro
+    $insert->bindParam(2, $customer_name, PDO::PARAM_STR); // STRING
+    $insert->bindParam(3, $order_date, PDO::PARAM_STR);   // DATA como string
+    $insert->bindParam(4, $sub_total, PDO::PARAM_STR);    // DECIMAL como string
+    $insert->bindParam(5, $total, PDO::PARAM_STR);        // DECIMAL como string
+    $insert->bindParam(6, $idUser, PDO::PARAM_INT);       // ID = inteiro
+    
+    // Executar a inserção de forma segura
     $insert->execute();
 
 
     }
     
     //2nd  insert query for tbl_invoice_details
-    $invoice_id=$pdo->lastInsertId();
-    if($invoice_id!=null){
-                
-        for($i=0 ; $i<count($arr_productid) ; $i++){
+    // Obter o ID da última inserção
+    $invoice_id = $pdo->lastInsertId();
+    
+    // Só prosseguir se tivermos um invoice_id válido E produtos para processar
+    if($invoice_id != null && !empty($arr_productid)){
+        
+        // Loop seguro que só executa se houver produtos
+        $product_count = count($arr_productid);
+        for($i=0; $i < $product_count; $i++){
 
 
         //if($arr_stock[$i]==0){
@@ -205,17 +248,18 @@ if(isset($_POST['btnsaveorder'])){
      }        
    //  echo"success fully created order";    
      //Balcao o seu codigo é 55
-   if($mid==55){
-        //echo "Hello";
-   // <a href="pagar.php?id='.$id.'&op=det&max='.$max.'" class="small-box-footer"><img src="../images/icons8-request_money.png"> '.$rows->total.' MT</a>
-    header('location:pagar.php?id=55&op=det&max=0'.$invoice_id.'');
+    // Verificar se é Balcao Geral (código 55) para o redirecionamento
+   if($mid_numerico == 55 || $is_balcao){
+        // Redirecionar para página de pagamento do Balcao Geral
+        header('location:pagar.php?id=55&op=det&max=0'.$invoice_id.'');
    }else{
+        // Redirecionar para página de mesa para outras mesas
         header('location:mesa.php');     
    }
      
  }
 
-}
+
 
   include_once 'cabecalho_user.php';   
 
