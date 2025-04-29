@@ -1,5 +1,55 @@
 <?php 
-  include_once'conexao.php';
+  // Sistema de licença
+  function verificarLicenca() {
+    $arquivo_licenca = 'licenca.txt'; // Arquivo onde a licença está armazenada
+    
+    // Verificar se o arquivo de licença existe
+    if (!file_exists($arquivo_licenca)) {
+      return false;
+    }
+    
+    // Ler a licença do arquivo
+    $licenca = trim(file_get_contents($arquivo_licenca));
+    
+    // Verificar se a licença não está vazia
+    if (empty($licenca)) {
+      return false;
+    }
+    
+    // Decodificar a licença (formato: data_expiracao|chave_hash)
+    $partes = explode('|', $licenca);
+    
+    if (count($partes) != 2) {
+      return false;
+    }
+    
+    $data_expiracao = $partes[0];
+    $hash = $partes[1];
+    
+    // Verificar se a data de expiração é válida
+    $hoje = date('Y-m-d');
+    if ($hoje > $data_expiracao) {
+      return false; // Licença expirada
+    }
+    
+    // Verificar se o hash é válido (chave secreta = 'maphezu_sistema')
+    $chave_secreta = 'maphezu_sistema';
+    $hash_esperado = md5($data_expiracao . $chave_secreta);
+    
+    return ($hash === $hash_esperado);
+  }
+  
+  // Verificar a licença antes de carregar o sistema
+  if (!verificarLicenca()) {
+    // Redirecionar para a página de licença expirada
+    header('Location: licenca_expirada.php');
+    exit();
+  }
+  
+  // Se chegou aqui, a licença é válida - continua para a tela de login normalmente
+  
+  include_once 'conexao.php';
+  include_once 'config_imagem.php';
 
   $sql1 = mysqli_query($mysqli,"SELECT * FROM empresa");
   $res1 = mysqli_fetch_array($sql1);
@@ -54,7 +104,7 @@
   <div class="login-box-body">
     <!--<h1 align="center" style="color: greenyellow;">SiVA ERP</h1>-->
     <!--<h1 align="center" ><?php echo $nome_db; ?></h1>-->
-    <p align="center"><img src="images/logo.jpg" width="150px"></p>
+    <p align="center"><img src="<?php echo $nome_imagem_logo; ?>" width="150px"></p>
     <p align="center" style="font-size: 15px;">Welcome to SiVA</p>
  
 
@@ -78,7 +128,7 @@
         <!-- /.col -->
       </div>
       <br>
-       <p align="center"><img src="images/Siva.png" width="200px"></p>
+       <p align="center"><img src="<?php echo $nome_imagem_logo; ?>" width="200px"></p>
       <p align="center">Powerd by <b>SIVA SOFTWARE</b></p>
     </form>
     <!-- /.social-auth-links -->

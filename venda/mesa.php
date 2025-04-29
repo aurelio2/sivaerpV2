@@ -3,6 +3,7 @@ include_once '../dbconnect.php';
 include_once "../session.php";
 include_once '../conexao.php';
 include_once 'funcoes_caixa.php';
+include_once '../config_imagem.php';
 error_reporting(0);
   
     include_once 'cabecalho_user.php';
@@ -117,12 +118,17 @@ error_reporting(0);
             // Já existe um registro com a data e estado especificados
             $res = mysqli_fetch_array($sql);
            
+            // Debug para verificar se a variável está definida
+            // if (!isset($nome_imagem_tipo)) {
+            //     $nome_imagem_tipo = '../images/restaurant.png'; // Definir um valor padrão caso não esteja definido
+            // }
+            
             if ($row->status==0) {
                 echo '
                 <div class="col-lg-3 col-xs-4">
                   <h2>'.$row->cod_mesa.'</h2>
                   <div class="icon">
-                    <img src="../images/restaurant.png">
+                    <img src="'.$nome_imagem_tipo.'" alt="Imagem Mesa">
                     <a href="start_order.php?id='.$id.'" class="small-box-footer"><i class="fa fa-arrow-circle-right"><img src="../images/icons8-shopping_cart.png">Vender</i></a>
                   </div>
                   <br>

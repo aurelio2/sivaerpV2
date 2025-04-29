@@ -112,7 +112,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
         <ul class="sidebar-menu" data-widget="tree">
           <li><a href="abrir_caixa.php"><img src="../images/icons8-cash_register_45.png"></i> <span>Caixa</span></a></li> 
 
-          <li><a href="mesa.php"><img src="../images/restaurant.png" width="40px"></i> <span>Mesa</span></a></li> 
+          <!-- <li><a href="mesa.php"><img src="../images/restaurant.png" width="40px"></i> <span>Mesa</span></a></li>  -->
           <li><a href="ajust_list.php"><img src="../images/warning.png" width="40px" title="Registar Quebras"></i> <span>Ajuste</span></a></li> 
           <!-- <li><a href="balcao.php?id=55"><img src="../images/icons8-add.png" width="30px"></i> <span>Balcão</span></a></li> 
             -->

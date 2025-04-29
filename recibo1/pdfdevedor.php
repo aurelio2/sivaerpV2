@@ -3,6 +3,7 @@
 require('../fpdf/fpdf.php');
 include_once'../dbconnect.php';
 include_once'../conexao.php';
+include_once'../config_imagem.php';
 
 session_start();
 $id=$_GET['id'];
@@ -49,7 +50,7 @@ $pdf = new FPDF('P','mm',array(82,210));
 
 //add new page
 $pdf->AddPage();
-$pdf->Image('../images/texas.png', 27,2,25);
+$pdf->Image('../' . $nome_imagem_logo, 27,2,25);
 $pdf->Ln(18);
 $pdf->SetFont('Courier','B',15);
 $pdf->Cell(60,4,$nome_db,0,1,'C');
