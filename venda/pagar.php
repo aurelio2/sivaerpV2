@@ -3,9 +3,11 @@
 include_once '../dbconnect.php';
 include_once "../session.php";
 include_once '../conexao.php';
+include_once 'funcoes_caixa.php';
 
 $ref = $_GET['id'];
 $idfuncionario = $idUser;
+$data = getDataCaixaAberto($idUser, $mysqli);
 
 function fill_product($pdo,$pid){
 
@@ -518,7 +520,7 @@ if (isset($_POST["btn_fechar"])) {
 
      $mesa_text=$_POST['txtmesa'];
 
-     $data = date('Y-m-d');
+     $data = getDataCaixaAberto($idUser, $mysqli);
 
      
     $insert_mesa=$pdo->prepare("UPDATE tbl_mesa SET status=:estado where cod_mesa=$codemesa");

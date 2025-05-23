@@ -2,9 +2,12 @@
 include_once '../dbconnect.php';
 include_once "../session.php";
 include_once '../conexao.php';
+include_once 'funcoes_caixa.php';
 error_reporting(0);
 
 include_once'cabecalho_user.php';
+
+$data = getDataCaixaAberto($idUser, $mysqli);
 
 
 ?>
@@ -43,7 +46,7 @@ include_once'cabecalho_user.php';
                     <div class="input-group-addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="date" class="form-control pull-right" id="datepicker1" name="date_1"  data-date-format="AAAA-MM-DD" id="date_1" value="<?php echo date('Y-m-d');?>">
+                    <input type="date" class="form-control pull-right" id="datepicker1" name="date_1"  data-date-format="AAAA-MM-DD" id="date_1" value="<?php echo $data; ?>">
                   </div>           
                 </div>      
                 
