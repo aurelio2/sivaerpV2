@@ -49,7 +49,10 @@ $pdf = new FPDF('P','mm',array(82,210));
 
 //add new page
 $pdf->AddPage();
-$pdf->Image('../images/casaCego.jpeg', 27,2,25);
+$logoPath = __DIR__ . '/../images/casaCego.jpeg';
+if (file_exists($logoPath)) {
+    $pdf->Image($logoPath, 27, 2, 25);
+}
 $pdf->Ln(18);
 $pdf->SetFont('Courier','B',15);
 $pdf->Cell(60,4,$nome_db,0,1,'C');

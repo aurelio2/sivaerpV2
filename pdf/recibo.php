@@ -20,7 +20,10 @@ $pdf->AddPage();
 //set font to arial, bold, 16pt
 $pdf->SetFont('Arial','B',14);
 //Cell(width , height , text , border , end line , [align] )
-$pdf->Image('../images/logo_barb.png', 27,2,25);
+$logoPath = __DIR__ . '/../images/logo_barb.png';
+if (file_exists($logoPath)) {
+    $pdf->Image($logoPath, 27, 2, 25);
+}
 $pdf->Ln(18);
 //$pdf->Cell(60,8,'Acliven service',1,1,'C');
 

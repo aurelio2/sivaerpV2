@@ -3,6 +3,7 @@
 $nome_imagem_logo = 'images/Siva.png'; // Caminho relativo da imagem
 
 // Definições padrão das imagens
+//Get default imagem as Logo
 
 // Definir numero diretamente como 1
 $numero = 1;

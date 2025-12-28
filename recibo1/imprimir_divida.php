@@ -4,6 +4,7 @@ require('../fpdf/fpdf.php');
 include_once '../dbconnect.php';
 include_once '../conexao.php';
 include_once'../config_imagem.php';
+include_once __DIR__ . '/config_pdf.php';
 
 // Capturar o número de celular da URL ou do formulário
 $numero = $_GET['number'];
@@ -18,8 +19,11 @@ $contacto_db = $res3['contacto'];
 // Criar o objeto PDF
 $pdf = new FPDF('P', 'mm', array(82, 210));
 $pdf->AddPage();
-$pdf->Image('../' . $nome_imagem_logo, 27, 2, 30);
-$pdf->Ln(18);
+$logoPath = __DIR__ . '/../' . $nome_imagem_logo;
+if ($mostrar_logo == 1 && !empty($nome_imagem_logo) && file_exists($logoPath)) {
+    $pdf->Image($logoPath, 27, 2, 30);
+    $pdf->Ln(18);
+}
 
 // Adicionar as informações da empresa
 $pdf->SetFont('Courier', 'B', 15);

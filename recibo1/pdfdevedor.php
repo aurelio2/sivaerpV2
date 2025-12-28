@@ -4,6 +4,7 @@ require('../fpdf/fpdf.php');
 include_once'../dbconnect.php';
 include_once'../conexao.php';
 include_once'../config_imagem.php';
+include_once __DIR__ . '/config_pdf.php';
 
 session_start();
 $id=$_GET['id'];
@@ -50,8 +51,11 @@ $pdf = new FPDF('P','mm',array(82,210));
 
 //add new page
 $pdf->AddPage();
-$pdf->Image('../' . $nome_imagem_logo, 27,2,25);
-$pdf->Ln(18);
+$logoPath = __DIR__ . '/../' . $nome_imagem_logo;
+if ($mostrar_logo == 1 && !empty($nome_imagem_logo) && file_exists($logoPath)) {
+    $pdf->Image($logoPath, 27, 2, 25);
+    $pdf->Ln(18);
+}
 $pdf->SetFont('Courier','B',15);
 $pdf->Cell(60,4,$nome_db,0,1,'C');
 $pdf->SetFont('Courier','B',8);

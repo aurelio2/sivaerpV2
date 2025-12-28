@@ -5,6 +5,7 @@ include_once'../dbconnect.php';
 include_once'../conexao.php';
 include_once'../session.php';
 include_once'../config_imagem.php';
+include_once __DIR__ . '/config_pdf.php';
 
 $data1 = $_GET['dia'];
 $data2 =$_GET['dia2'];
@@ -45,8 +46,11 @@ $pdf = new FPDF('P','mm',array(82,210));
 
 //add new page
 $pdf->AddPage();
-$pdf->Image('../' . $nome_imagem_logo, 27,2,25);
-$pdf->Ln(18);
+$logoPath = __DIR__ . '/../' . $nome_imagem_logo;
+if ($mostrar_logo == 1 && !empty($nome_imagem_logo) && file_exists($logoPath)) {
+    $pdf->Image($logoPath, 27, 2, 25);
+    $pdf->Ln(18);
+}
 //set font to arial, bold, 16pt
 $pdf->SetFont('Arial','B',16);
 //Cell(width , height , text , border , end line , [align] 
