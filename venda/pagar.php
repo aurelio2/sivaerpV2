@@ -586,6 +586,11 @@ if (isset($_POST["btn_processar"])) {
        <h1>Total: <span style="color:red;"><?php echo $total; ?> MT</span></h1>
 
        <h2>Troco: <span id="troco" style="color: green;">0.00 MT</span></h2>
+       <div class="form-group">
+        <div id="valorEmFalta" style="display: none; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px; padding: 10px; margin-top: 10px;">
+            <strong style="color: #721c24;">Valor em falta: <span id="valorFaltante">0.00</span> MT</strong>
+        </div>
+    </div>
       </div>
      <form method="post">
     <input type="hidden" class="form-control pull-right" name="txtmesa" value="0">
@@ -627,6 +632,9 @@ if (isset($_POST["btn_processar"])) {
         <input type="text" id="txtNumeroPessoa" name="txtNumeroPessoa"  class="form-control" placeholder="Digite o número da pessoa" />
     </div>
     </div>
+    
+    <!-- Campo para mostrar valor em falta -->
+    
    
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -974,10 +982,13 @@ if (isset($_POST["btn_processar"])) {
 
         // Hide the troco display
         $("#trocoDisplay").hide();
+        
+        // Calcular valor em falta quando mudar as opções
+        calcularValorEmFalta();
     });
 
     // Function to calculate and update the troco in real-time when the "Valor a Receber" field changes
-    $("#txtvalorreceber").on("input", function () {
+    $("#txtvalorreceber").on("input keyup change blur", function () {
         var total = <?php echo $total; ?>;
         var valorReceber = parseFloat($(this).val());
 
@@ -986,6 +997,8 @@ if (isset($_POST["btn_processar"])) {
             $("#troco").html(""); // Limpa a exibição do troco
             $("#trocoInput").val(""); // Limpa o valor do troco no input
             $("#numeroPessoa").hide(); // Esconde o campo número da pessoa
+            // Atualizar valor em falta quando campo fica vazio
+            calcularValorEmFalta();
             return; // Sai da função
         }
 
@@ -1008,6 +1021,72 @@ if (isset($_POST["btn_processar"])) {
             $("#trocoInput").val("0"); // Define o valor do troco em trocoInput como 0
             $("#numeroPessoa").hide(); // Esconde o campo número da pessoa
         }
+        
+        // Sempre atualizar valor em falta quando o campo mudar
+        calcularValorEmFalta();
+    });
+
+    // Função para calcular valor em falta
+    function calcularValorEmFalta() {
+        var total = <?php echo $total; ?>;
+        var somaPagamentos = 0;
+        var temOpcaoHabilitada = false;
+        
+        // Somar todos os valores dos métodos de pagamento habilitados
+        if ($("#cash-option").is(":checked")) {
+            temOpcaoHabilitada = true;
+            // Usar txtcash se estiver visível, senão usar txtvalorreceber
+            var valorCash = 0;
+            if ($("#txtcash").is(":visible")) {
+                valorCash = parseFloat($("#txtcash").val()) || 0;
+            } else {
+                valorCash = parseFloat($("#txtvalorreceber").val()) || 0;
+            }
+            somaPagamentos += valorCash;
+        }
+        
+        if ($("#mpesa-option").is(":checked")) {
+            temOpcaoHabilitada = true;
+            var valorMpesa = parseFloat($("#txtmpesa").val()) || 0;
+            somaPagamentos += valorMpesa;
+        }
+        
+        if ($("#emola-option").is(":checked")) {
+            temOpcaoHabilitada = true;
+            var valorEmola = parseFloat($("#txtemola").val()) || 0;
+            somaPagamentos += valorEmola;
+        }
+        
+        if ($("#pos-option").is(":checked")) {
+            temOpcaoHabilitada = true;
+            var valorPos = parseFloat($("#txtpos").val()) || 0;
+            somaPagamentos += valorPos;
+        }
+        
+        // Calcular valor em falta
+        var valorFalta = total - somaPagamentos;
+        
+        // Mostrar valor em falta se há opção habilitada e valor falta > 0
+        if (temOpcaoHabilitada && valorFalta > 0) {
+            $("#valorFaltante").text(valorFalta.toFixed(2));
+            $("#valorEmFalta").show();
+        } else {
+            // Esconder valor em falta
+            $("#valorEmFalta").hide();
+        }
+    }
+    
+    // Adicionar eventos para calcular valor em falta em tempo real
+    $("#txtvalorreceber, #txtcash, #txtmpesa, #txtemola, #txtpos").on("input keyup change blur", function() {
+        calcularValorEmFalta();
+    });
+    
+    // Também chamar quando os checkboxes mudarem
+    $("input[name='payment-option']").on("change", function() {
+        // Pequeno delay para garantir que os campos sejam mostrados/escondidos primeiro
+        setTimeout(function() {
+            calcularValorEmFalta();
+        }, 50);
     });
 
 });

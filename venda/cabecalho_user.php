@@ -138,6 +138,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
 
           <ul class="treeview-menu">
           <li><a href="diario.php"><i class="fa fa-calendar"></i> <span>Diario</span></a>
+          <li><a href="relatorio_devedor.php"><i class="fa fa-calendar"></i> <span>Devedores </span></a>
           <li><a href="acesso_rela.php"><i class="fa fa-user"></i> <span>Acesso</span></a>
         </li>
       </ul>

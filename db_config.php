@@ -4,7 +4,7 @@
 
 // Credenciais para o banco de dados maphezu (principal)
 $db_host = "localhost";
-$db_name = "maphezu";
+$db_name = "studio258";
 $db_user = "root";
 $db_pass = "";
 

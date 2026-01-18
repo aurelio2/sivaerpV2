@@ -189,6 +189,28 @@
 
           </ul>
         </li>
+
+        <?php 
+        // Verificar se o usuário tem permissões de desenvolvedor
+        if(isset($_SESSION['txt_email'])) {
+            $sql_user_check = mysqli_query($mysqli, "SELECT role FROM tbl_user WHERE useremail = '".$_SESSION['txt_email']."'");
+            if($sql_user_check) {
+                $user_check = mysqli_fetch_array($sql_user_check);
+                if($user_check['role'] == 'dev') {
+        ?>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-cogs" style="font-size:20px;color:#ff6b6b"></i> 
+            <span style="color:#ff6b6b">Desenvolvedor</span><i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="dev_panel.php"><i class="fa fa-wrench" style="font-size:16px;color:#ff6b6b"></i><span style="color:#ff6b6b">Painel Dev</span></a></li>
+          </ul>
+        </li>
+        <?php 
+                }
+            }
+        }
+        ?>
         
       </ul>
 

@@ -54,7 +54,7 @@ $senha = $_POST['txt_senha'];
 
 if (isset($entrar)) 
 {						    
-	$verifica = mysqli_query($mysqli,"SELECT * FROM tbl_user WHERE BINARY  useremail = '$login' and  BINARY  password = '$senha' AND role = 'admin'") or die("erro ao selecionar");
+	$verifica = mysqli_query($mysqli,"SELECT * FROM tbl_user WHERE BINARY  useremail = '$login' and  BINARY  password = '$senha' AND role = 'admin' ") or die("erro ao selecionar");
 	if (mysqli_num_rows($verifica)>0)
 	{
 		session_start();
