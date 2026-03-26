@@ -83,7 +83,7 @@ error_reporting(0);
      
         <?php 
 
-         $select=$pdo->prepare("select * from tbl_mesa order by status=1 desc ");
+         $select=$pdo->prepare("select DISTINCT cod_mesa, id, status, descricao from tbl_mesa order by status=1 desc, cod_mesa asc ");
          $select-> execute();
 
          while ($row=$select->fetch(PDO::FETCH_OBJ)) {

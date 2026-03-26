@@ -438,6 +438,7 @@ if(isset($_POST['btnsaveorder'])){
                                                     <th>Produto</th>
                                                     <th>Stock</th>
                                                     <th>Preço</th>
+                                                    <th>Unidade</th>
                                                     <th>Quantidade</th>
                                                     <th>Subtotal</th>
                                                     <th class="hidden">T.Iva</th>
@@ -642,9 +643,10 @@ if(isset($_POST['btnsaveorder'])){
                     html += '<tr>';
                     html += '<td><center><button type="button" name="remove" class="btn btn-danger btn-sm btnremove"><span class="glyphicon glyphicon-remove"></span></button></center></td>';
                     html += '<td>' + productName + '<input type="hidden" class="form-control pname" name="productname[]" value="' + productName + '" readonly><input type="hidden" class="productid" name="productid[]" value="' + productId + '"></td>';
-                    html += '<td><input type="number" class="form-control stock" name="stock[]" value="' + productStock + '" readonly></td>';
-                    html += '<td><input type="text" class="form-control price" name="price[]" value="' + productPrice + '" readonly id="txt_price"></td>';
-                    html += '<td><input type="number" min="1" max="' + productStock + '" class="form-control qty" name="qty[]" value="1"></td>';
+                    html += '<td><input type="number" class="form-control stock" name="stock[]" value="' + productStock + '" readonly style="width:70px;"></td>';
+                    html += '<td><input type="text" class="form-control price" name="price[]" value="' + productPrice + '" readonly id="txt_price" style="width:80px;"></td>';
+                    html += '<td><select class="form-control unidade" name="unidade[]" style="width:80px;"><option value="un">Unidade</option><option value="kg">Kg</option></select></td>';
+                    html += '<td><input type="number" min="0.01" step="0.01" max="' + productStock + '" class="form-control qty" name="qty[]" value="1"></td>';
                     html += '<td><input type="text" class="form-control total" name="total[]" value="' + productPrice + '" readonly></td>';
                     html += '<td class="hidden"><input type="number" class="form-control totaliva" name="totaliva[]" value="' + (productPrice * productIva / 100) + '" readonly></td>';
                     
@@ -708,6 +710,30 @@ if(isset($_POST['btnsaveorder'])){
 
      }) // btnremove end here  
         
+        // Evento para mudar o tipo de input quando a unidade for alterada
+        $(document).on('change', '.unidade', function(){
+            var tr = $(this).closest('tr');
+            var qtyInput = tr.find('.qty');
+            var unidade = $(this).val();
+            
+            if(unidade === 'kg') {
+                // Permitir valores decimais para kg
+                qtyInput.attr('step', '0.01');
+                qtyInput.attr('min', '0.01');
+            } else {
+                // Apenas números inteiros para unidades
+                qtyInput.attr('step', '1');
+                qtyInput.attr('min', '1');
+                // Arredondar o valor se for decimal
+                var currentVal = parseFloat(qtyInput.val());
+                if(currentVal % 1 !== 0) {
+                    qtyInput.val(Math.round(currentVal));
+                }
+            }
+            
+            // Recalcular o total
+            qtyInput.trigger('change');
+        });
 
        $("#producttable").delegate(".qty","keyup change" ,function(){
 

@@ -274,6 +274,7 @@ $data = getDataCaixaAberto($idUser, $mysqli);
                   <th>Reimprimir</th>  
                   <th>Conteudo</th>
                   <th>Divida</th>
+                  <th>Restaurar</th>
                 </tr>                    
               </thead>              
               <tbody>
@@ -295,6 +296,9 @@ $data = getDataCaixaAberto($idUser, $mysqli);
                   $seachCliente = mysqli_query($mysqli,"SELECT * FROM client_order_detalhes where invoice_id = $id_invoice");
                   $verCliente=mysqli_fetch_array($seachCliente);
                   
+                  $seachPayment = mysqli_query($mysqli,"SELECT * FROM tbl_control_payment where id_invoice = $id_invoice");
+                  $verPayment=mysqli_fetch_array($seachPayment);
+                  
                   echo'
                   <tr>
                   <td>'.$row->order_date.'</td>
@@ -314,8 +318,17 @@ $data = getDataCaixaAberto($idUser, $mysqli);
                     
                   }else if($ver['estado']==1){
                    echo '<td align="left"><span class="label label-success">Paga</span></td>';
+                  }else{
+                   echo '<td align="left">-</td>';
                   }
                   
+                  if(!$verPayment || ($verPayment['cash']==0 && $verPayment['mpesa']==0 && $verPayment['emola']==0 && $verPayment['pos']==0)){
+                    echo '<td align="center"><a href="editorder.php?id='.$row->invoice_id.'&restaurar=1" class="btn btn-warning btn-xs" title="Restaurar venda - editar e reprocessar"><i class="fa fa-refresh"></i> Restaurar</a></td>';
+                  }else{
+                    echo '<td align="center"><span class="label label-success">OK</span></td>';
+                  }
+                  
+                  echo '</tr>';
                   
                 }          
                 ?>                       

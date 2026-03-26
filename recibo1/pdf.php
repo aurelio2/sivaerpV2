@@ -85,7 +85,8 @@ $pdf->Ln(3);
 $pdf->Cell(0,2,'---------------------------------------',0,1,'C');
 $pdf->SetX(7);
 $pdf->SetFont('Courier','B',8);
-$pdf->Cell(11,2,'Qtd',0,0,'L');
+$pdf->Cell(8,2,'Qtd',0,0,'L');
+$pdf->Cell(7,2,'Un',0,0,'L');
 //$pdf->Cell(11,2,'Preco',0,0,'L');
 $pdf->Cell(0,2,'Artigo',0,0,'L');   //70
 $pdf->Cell(1,2,'TOTAL',0,1,'R');
@@ -96,11 +97,14 @@ $pdf->Cell(0,2,'---------------------------------------',0,1,'C');
 while($item=$select->fetch(PDO::FETCH_OBJ)){
     $pdf->SetX(7);
     $valor=$item->price*$item->qty;
+    $unidade = (fmod($item->qty, 1) == 0) ? 'Un' : 'Kg';
+    $quantidade = (fmod($item->qty, 1) == 0) ? intval($item->qty) : $item->qty;
 $pdf->SetFont('Courier','B',8);
-$pdf->Cell(11,2.5,$item->qty,0,0,'L');
+$pdf->Cell(8,2.5,$quantidade,0,0,'L');
+$pdf->Cell(7,2.5,$unidade,0,0,'L');
 //$pdf->Cell(11,2.5,number_format($item->price,2),0,0,'L');
 $pdf->Cell(10,2.5,$item->product_name,0,0,'L');   
-$pdf->Cell(45,2.5,number_format($item->price*$item->qty,2),0,1,'R');  
+$pdf->Cell(40,2.5,number_format($item->price*$item->qty,2),0,1,'R');  
     
 }
 $pdf->Cell(0,2,'---------------------------------------',0,1,'C');

@@ -23,6 +23,8 @@ function fill_product($pdo,$pid){
 }
 
 $id=$_GET['id'];
+$restaurar = isset($_GET['restaurar']) ? $_GET['restaurar'] : 0;
+
 $select=$pdo->prepare("select * from tbl_invoice where invoice_id =$id and user='$idUser'");
 $select->execute();
 
@@ -39,6 +41,11 @@ $subtotal=$row['subtotal'];
 
 $codemesa=$row['mesa'];
 
+// Verificar status da mesa
+$check_mesa = mysqli_query($mysqli,"SELECT status FROM tbl_mesa WHERE cod_mesa = '$codemesa'");
+$mesa_status = mysqli_fetch_array($check_mesa);
+$mesa_ocupada = ($mesa_status && $mesa_status['status'] == 1);
+
 // Verificar se existe um caixa aberto
 $caixa_aberto = existeCaixaAberto($idUser, $mysqli);
 if (!$caixa_aberto) {
@@ -53,6 +60,14 @@ $select=$pdo->prepare("select * from tbl_invoice_details where invoice_id =$id")
 $select->execute();
 $row_invoice_details=$select->fetchAll(PDO::FETCH_ASSOC);
 
+// Reativar mesa quando clicar no botão
+if(isset($_POST['btnreativarmesa'])){
+    $stmt = mysqli_query($mysqli,"UPDATE tbl_mesa SET status='1' WHERE cod_mesa = '$codemesa'");
+    if($stmt){
+        echo '<script>alert("Mesa reativada com sucesso!");</script>';
+        echo '<meta http-equiv="refresh" content="0">';
+    }
+}
 
 if(isset($_POST['btnupdateorder'])){
     $txt_customer_name=$_POST['txtcustomer'];
@@ -126,7 +141,7 @@ if(isset($_POST['btnupdateorder'])){
        $insert->execute();
 
    }        
-   header('location:mesa.php');     
+   header('location:pagar.php?op=det&max='.$id.'&id='.$codemesa);     
 }    
 }
 
@@ -203,6 +218,17 @@ include_once 'add_styles.php';
 
         <div class="box box-default">
             <br>
+            <?php if(!$mesa_ocupada): ?>
+            <div class="alert alert-warning">
+                <strong><i class="fa fa-exclamation-triangle"></i> Atenção:</strong> A mesa <strong><?php echo $codemesa; ?></strong> está livre. 
+                <form action="" method="post" style="display:inline;">
+                    <button type="submit" name="btnreativarmesa" class="btn btn-success btn-sm">
+                        <i class="fa fa-check-circle"></i> Reativar Mesa
+                    </button>
+                </form>
+            </div>
+            <?php endif; ?>
+            
              <form action="" method="post">
             <p><b>Note:</b><span style="color:red;">Para cancelar a conta, primeiro clique no bota <span style="color:black;">X</span> na lista da conta para apagar os produtos, depois clique no botão cancelar!</span> 
                 <button type="submit" name="btncancelar" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove">CANCELAR</span></button> </p>
@@ -262,6 +288,7 @@ include_once 'add_styles.php';
                                                     <th>Produto</th>
                                                     <th>Stock</th>
                                                     <th>Preço</th>
+                                                    <th>Unidade</th>
                                                     <th>Quantidade</th>
                                                     <th>Subtotal</th>
                                                     <th class="hidden">T.Iva</th>
@@ -284,9 +311,10 @@ include_once 'add_styles.php';
                                                         <input type="hidden" class="productid" name="productid[]" value="<?php echo $item_invoice_details['product_id']; ?>">
                                                         <input type="hidden" class="form-control txtivas" name="iva[]" readonly id="txt_txtivas" value="<?php echo $row_product['iva']; ?>">
                                                     </td>
-                                                    <td><input type="text" class="form-control stock" name="stock[]" value="<?php echo $row_product['pstock']; ?>" readonly></td>
-                                                    <td><input type="text" class="form-control price" name="price[]" value="<?php echo $row_product['saleprice']; ?>" readonly></td>
-                                                    <td><input type="number" min="1" max="<?php echo $row_product['pstock']; ?>" class="form-control qty" name="qty[]" value="<?php echo $item_invoice_details['qty']; ?>"></td>
+                                                    <td><input type="text" class="form-control stock" name="stock[]" value="<?php echo $row_product['pstock']; ?>" readonly style="width:70px;"></td>
+                                                    <td><input type="text" class="form-control price" name="price[]" value="<?php echo $row_product['saleprice']; ?>" readonly style="width:80px;"></td>
+                                                    <td><select class="form-control unidade" name="unidade[]" style="width:100px;"><option value="un" <?php echo (fmod($item_invoice_details['qty'], 1) == 0) ? 'selected' : ''; ?>>Unidade</option><option value="kg" <?php echo (fmod($item_invoice_details['qty'], 1) != 0) ? 'selected' : ''; ?>>Kg</option></select></td>
+                                                    <td><input type="number" min="<?php echo (fmod($item_invoice_details['qty'], 1) == 0) ? '1' : '0.01'; ?>" step="<?php echo (fmod($item_invoice_details['qty'], 1) == 0) ? '1' : '0.01'; ?>" max="<?php echo $row_product['pstock']; ?>" class="form-control qty" name="qty[]" value="<?php echo (fmod($item_invoice_details['qty'], 1) == 0) ? intval($item_invoice_details['qty']) : $item_invoice_details['qty']; ?>"></td>
                                                     <td><input type="text" class="form-control total" name="total[]" value="<?php echo $row_product['saleprice']*$item_invoice_details['qty']; ?>" readonly></td>
                                                     <td class="hidden"><input type="text" class="form-control totaliva" name="totaliva[]" value="<?php echo $item_invoice_details['t_iva']; ?>" readonly></td>
                                                 </tr>
@@ -429,9 +457,10 @@ include_once 'add_styles.php';
                     html += '<tr>';
                     html += '<td><center><button type="button" name="remove" class="btn btn-danger btn-sm btnremove"><span class="glyphicon glyphicon-remove"></span></button></center></td>';
                     html += '<td>' + productName + '<input type="hidden" class="form-control pname" name="productname[]" value="' + productName + '" readonly><input type="hidden" class="productid" name="productid[]" value="' + productId + '"></td>';
-                    html += '<td><input type="text" class="form-control stock" name="stock[]" value="' + productStock + '" readonly></td>';
-                    html += '<td><input type="text" class="form-control price" name="price[]" value="' + productPrice + '" readonly id="txt_price"></td>';
-                    html += '<td><input type="number" min="1" max="' + productStock + '" class="form-control qty" name="qty[]" value="1"></td>';
+                    html += '<td><input type="text" class="form-control stock" name="stock[]" value="' + productStock + '" readonly style="width:70px;"></td>';
+                    html += '<td><input type="text" class="form-control price" name="price[]" value="' + productPrice + '" readonly id="txt_price" style="width:80px;"></td>';
+                    html += '<td><select class="form-control unidade" name="unidade[]" style="width:100px;"><option value="un">Unidade</option><option value="kg">Kg</option></select></td>';
+                    html += '<td><input type="number" min="0.01" step="0.01" max="' + productStock + '" class="form-control qty" name="qty[]" value="1"></td>';
                     html += '<td><input type="text" class="form-control total" name="total[]" value="' + productPrice + '" readonly></td>';
                     html += '<td class="hidden"><input type="text" class="form-control totaliva" name="totaliva[]" value="' + (productPrice * productIva / 100) + '" readonly></td>';
                     
@@ -489,6 +518,31 @@ include_once 'add_styles.php';
         $("#txtdue").val("");
 
      }) // btnremove end here  
+     
+     // Evento para mudar o tipo de input quando a unidade for alterada
+     $(document).on('change', '.unidade', function(){
+         var tr = $(this).closest('tr');
+         var qtyInput = tr.find('.qty');
+         var unidade = $(this).val();
+         
+         if(unidade === 'kg') {
+             // Permitir valores decimais para kg
+             qtyInput.attr('step', '0.01');
+             qtyInput.attr('min', '0.01');
+         } else {
+             // Apenas números inteiros para unidades
+             qtyInput.attr('step', '1');
+             qtyInput.attr('min', '1');
+             // Arredondar o valor se for decimal
+             var currentVal = parseFloat(qtyInput.val());
+             if(currentVal % 1 !== 0) {
+                 qtyInput.val(Math.round(currentVal));
+             }
+         }
+         
+         // Recalcular o total
+         qtyInput.trigger('change');
+     });
 
 
     /* $("#producttable").delegate(".qty","keyup change" ,function(){

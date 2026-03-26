@@ -152,6 +152,8 @@
           <ul class="treeview-menu">
             <li class="hidden"><a href="addproduct"><i class="fa fa-circle-o-notch" style="font-size:16px;color:white"></i><span>Produto</span></a></li>
             <li><a href="category"><i class="fa fa-circle-o-notch" style="font-size:16px;color:white"></i><span>Categoria</span></a></li>
+            <li><a href="expense_categories.php"><i class="fa fa-circle-o-notch" style="font-size:16px;color:white"></i><span>Categoria Despesa</span></a></li>
+            <li><a href="expenses.php"><i class="fa fa-circle-o-notch" style="font-size:16px;color:white"></i><span>Despesas</span></a></li>
             <li><a href="registration"><i class="fa fa-user" style="font-size:20px;color:white"></i> <span>Usúario</span></a></li>
             <li><a href="forncedor"><i class="fa fa-users" style="font-size:20px;color:white"></i> <span>Fornecedores</span></a></li>
             <li><a href="mesa"><i class="fa fa-table" style="font-size:20px;color:white"></i> <span>Mesa</span></a></li>
@@ -170,6 +172,7 @@
             <li><a href="tablereport" style="color: white;"><i class="fa fa-calendar" style="color: white;"></i> <span>Movimentos Periódicos</span></a></li>
             <li><a href="transfer_history" style="color: white;"><i class="fa fa-calendar" style="color: white;"></i> <span>Histórico de Transferência</span></a></li>
             <li><a href="entradas" style="color: white;"><i class="fa fa-calendar" style="color: white;"></i> <span>Entradas</span></a></li>
+            <li><a href="relatorio_despesas.php" style="color: white;"><i class="fa fa-calendar" style="color: white;"></i> <span>Relatório de Despesas</span></a></li>
             <li><a href="diariovendas" style="color: white;"><i class="fa fa-calendar" style="color: white;"></i> <span>Relatório de Vendas Diários</span></a></li>
             <li><a href="periodicovendas" style="color: white;"><i class="fa fa-calendar" style="color: white;"></i> <span>Relatório de Vendas Periódicos</span></a></li>
             <li><a href="relatorio_devedor" style="color: white;"><i class="fa fa-calendar" style="color: white;"></i> <span>Relatório de Devedores</span></a></li>

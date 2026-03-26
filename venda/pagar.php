@@ -337,6 +337,7 @@ if(isset($_POST['btnupdateorder'])){
                                                     <th>#</th>
                                                     <th>Produto</th>
                                                     <th>Preço</th>
+                                                    <th>Unidade</th>
                                                     <th>Qtd</th>
                                                     <th>Subtotal</th>
                                                 </tr>
@@ -360,7 +361,10 @@ if(isset($_POST['btnupdateorder'])){
                                                     <input type="hidden" class="form-control price" name="price[]" value="<?php echo $row_product['saleprice']; ?>" readonly>
                                                 </td>
                                                 <td>
-                                                    <?php echo $item_invoice_details['qty']; ?>
+                                                    <?php echo (fmod($item_invoice_details['qty'], 1) == 0) ? 'Unidade' : 'Kg'; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo (fmod($item_invoice_details['qty'], 1) == 0) ? intval($item_invoice_details['qty']) : $item_invoice_details['qty']; ?>
                                                     <input type="hidden" class="form-control qty" name="qty[]" value="<?php echo $item_invoice_details['qty']; ?>">
                                                     <input type="hidden" class="form-control stock" name="stock[]" value="<?php echo $row_product['pstock']; ?>" readonly>
                                                     <input type="hidden" class="form-control txtivas" name="iva[]" readonly id="txt_txtivas" value="<?php echo $row_product['iva']; ?>">
