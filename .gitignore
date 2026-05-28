@@ -1,0 +1,34 @@
+# Dependências do Bower
+bower_components/
+
+# Arquivos de build
+build/
+
+# Node modules (caso use npm também)
+node_modules/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Configurações locais (opcional)
+# db_config.php
