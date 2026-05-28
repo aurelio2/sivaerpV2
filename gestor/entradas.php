@@ -159,15 +159,16 @@ include_once'header.php';
                 $select->execute();
 
                 while($row=$select->fetch(PDO::FETCH_OBJ)  ){  
+                  $total = floatval($row->qtd_anterior) + floatval($row->quantidade) + floatval($row->ajust);
                   echo'
                   <tr>
                   <td>'.$row->id.'</td>
                   <td>'.$row->idproduto.'</td>
                   <td>'.$row->produto.'</td>
-                  <td>'.$row->quantidade.'</td>
-                  <td>'.$row->qtd_anterior.'</td>
+                  <td>'.number_format($row->quantidade, 2).'</td>
+                  <td>'.number_format($row->qtd_anterior, 2).'</td>
                   
-                  <td>'.(number_format($row->qtd_anterior)+number_format($row->quantidade)+number_format($row->ajust)).'</td>
+                  <td>'.number_format($total, 2).'</td>
 
                   <td>'.$row->data.'</td>
 

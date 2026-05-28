@@ -114,9 +114,9 @@ include_once'header.php';
                         <td>' . $row->pid . '</td>
                         <td>' . $row->pname . '</td>
                         <td>' . $row->pcategory . '</td>
-                        <td>' . $row->purchaseprice . '</td>
-                        <td>' . $row->saleprice . '</td>
-                        <td>' . ($row->pstock <= 0 ? '<span style="color:red;">' . $row->pstock . '</span>' : '<span style="color:green;">' . $row->pstock . '</span>') . '</td>
+                        <td>' . number_format($row->purchaseprice, 2) . '</td>
+                        <td>' . number_format($row->saleprice, 2) . '</td>
+                        <td>' . ($row->pstock <= 0 ? '<span style="color:red;">' . number_format($row->pstock, 2) . '</span>' : '<span style="color:green;">' . number_format($row->pstock, 2) . '</span>') . '</td>
                         <td>
                             <button class="btn btn-primary select-product" data-id="' . $row->pid . '" data-name="' . $row->pname . '" data-stock="' . $row->pstock . '">Transferir</button>
                              <a href="armazem_edit.php?id='.$row->pid.'" class="btn btn-info" role="button"><span class="glyphicon glyphicon-edit" style="color:#ffffff" data-toggle="tooltip" title="Edit Product">Edit</span></a>
@@ -137,7 +137,7 @@ include_once'header.php';
     <form id="transferForm" method="POST" action="transfer_products.php">
         <input type="hidden" name="product_id" id="modalProductId">
         <label for="quantity">Quantidade para transferir:</label>
-        <input type="number" name="quantity" id="modalQuantity" min="1" required>
+        <input type="number" step="0.01" min="0.01" name="quantity" id="modalQuantity" required>
         <button type="submit" class="btn btn-success">Transferir</button>
         <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
     </form>

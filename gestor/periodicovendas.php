@@ -186,10 +186,16 @@ include_once'header.php';
                 
                 <?php
                 //$select=$pdo->prepare("select * from tbl_invoice  where order_date=:fromdate order by invoice_id DESC");
-                $select=$pdo->prepare("SELECT p.pid, t.product_id, p.pname, p.purchaseprice, p.saleprice, t.qty, t.order_date, (p.saleprice * t.qty) as venda, (p.purchaseprice * t.qty) as compra, (p.saleprice * t.qty) - (p.purchaseprice * t.qty) as lucrototal
+                $select=$pdo->prepare("SELECT p.pid, p.pname, p.purchaseprice, p.saleprice, 
+                SUM(t.qty) as qty, 
+                SUM(p.saleprice * t.qty) as venda, 
+                SUM(p.purchaseprice * t.qty) as compra, 
+                SUM((p.saleprice * t.qty) - (p.purchaseprice * t.qty)) as lucrototal
                 FROM tbl_invoice_details t
                 INNER JOIN tbl_product p ON p.pid = t.product_id
-                WHERE order_date between :fromdate AND :todate");
+                WHERE order_date between :fromdate AND :todate
+                GROUP BY p.pid, p.pname, p.purchaseprice, p.saleprice
+                ORDER BY p.pname ASC");
                 $select->bindParam(':fromdate',$_POST['date_1']);  
                 $select->bindParam(':todate',$_POST['date_2']);  
                 
@@ -199,12 +205,12 @@ include_once'header.php';
                   
                   echo'
                   <tr>
-                  <td>'.$row->order_date.'</td>
+                  <td>Período</td>
                   <td>'.$row->pname.'</td>
-                  <td align="left"><span class="label label-success">'.$row->purchaseprice ." MT".'</span></td>
-                  <td align="left"><span class="label label-success">'.$row->saleprice ." MT".'</span></td>
-                  <td>'.$row->qty.'</td>
-                  <td>'.$row->venda.'</td>
+                  <td align="left"><span class="label label-success">'.number_format($row->purchaseprice, 2) ." MT".'</span></td>
+                  <td align="left"><span class="label label-success">'.number_format($row->saleprice, 2) ." MT".'</span></td>
+                  <td>'.number_format($row->qty, 2).'</td>
+                  <td>'.number_format($row->venda, 2).'</td>
                   <td>'.number_format($row->lucrototal,2).'</td>
                   
                   ';

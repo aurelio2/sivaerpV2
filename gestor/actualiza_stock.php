@@ -102,25 +102,25 @@ if (isset($_POST['btn_stock'])) {
                     $select1=$pdo->prepare("select * from tbl_entradas order by data desc ");
                     $select1->execute();
                     while ($row=$select1->fetch(PDO::FETCH_OBJ)) {
-                      //$total=$row->quantidade+$row->qtd_anterior;
+                      $total = floatval($row->qtd_anterior) + floatval($row->quantidade) + floatval($row->ajust);
                       echo '
                       <tr>
                       <td align="right">'.$row->idproduto.'</td>
                       <td align="right">'.$row->produto.'</td>
-                      <td align="right">'.$row->quantidade.'</td>
-                      <td align="right">'.$row->qtd_anterior.'</td>
+                      <td align="right">'.number_format($row->quantidade, 2).'</td>
+                      <td align="right">'.number_format($row->qtd_anterior, 2).'</td>
                       ';
                       if($row->ajust==0){
                         echo'<td align="right">-</td>';
                       }
                       else{
                         echo '
-                        <td align="right">'.$row->ajust.'</td> 
+                        <td align="right">'.number_format($row->ajust, 2).'</td> 
                         '; 
                       }
                       echo ' 
 
-                      <td align="right">'.(number_format($row->qtd_anterior)+number_format($row->quantidade)+number_format($row->ajust)).'</td>
+                      <td align="right">'.number_format($total, 2).'</td>
                       <td align="right">'.$row->data.'</td>  
                        <td align="right">
                       ';
@@ -166,25 +166,25 @@ if (isset($_POST['btn_stock'])) {
                      data = curdate()");
                     $select1->execute();
                     while ($row=$select1->fetch(PDO::FETCH_OBJ)) {
-                      //$total=$row->quantidade+$row->qtd_anterior;
+                      $total = floatval($row->qtd_anterior) + floatval($row->quantidade) + floatval($row->ajust);
                       echo '
                       <tr>
                       <td align="right">'.$row->idproduto.'</td>
                       <td align="right">'.$row->produto.'</td>
-                      <td align="right">'.$row->quantidade.'</td>
-                      <td align="right">'.$row->qtd_anterior.'</td>
+                      <td align="right">'.number_format($row->quantidade, 2).'</td>
+                      <td align="right">'.number_format($row->qtd_anterior, 2).'</td>
                       ';
                       if($row->ajust==0){
                         echo'<td align="right">-</td>';
                       }
                       else{
                         echo '
-                        <td align="right">'.$row->ajust.'</td> 
+                        <td align="right">'.number_format($row->ajust, 2).'</td> 
                         '; 
                       }
                       echo ' 
 
-                      <td align="right">'.(number_format($row->qtd_anterior)+number_format($row->quantidade)+number_format($row->ajust)).'</td>
+                      <td align="right">'.number_format($total, 2).'</td>
                       <td align="right">'.$row->data.'</td>  
                        <td align="right">
                       ';
@@ -276,7 +276,7 @@ if (isset($_POST['btn_stock'])) {
                         <label>Quantidade</label>
                         <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></span>
-                          <input type="number" class="form-control input-lg" name="novoQtd" placeholder="Quantidade a inserir" required="">
+                          <input type="number" step="0.01" min="0.01" class="form-control input-lg" name="novoQtd" placeholder="Quantidade a inserir" required="">
                         </div>
                       </div>
                       <!--Estado-->

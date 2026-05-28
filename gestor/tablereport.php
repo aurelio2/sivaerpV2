@@ -271,7 +271,7 @@ include_once'header.php';
 
                 while($row=$select->fetch(PDO::FETCH_OBJ)  ){
 
-                   $sql1 = mysqli_query($mysqli,"SELECT * FROM tbl_mesa where cod_mesa = $row->mesa");
+                   $sql1 = mysqli_query($mysqli,"SELECT * FROM tbl_mesa where cod_mesa = '$row->mesa'");
                   $res1 = mysqli_fetch_array($sql1);
                   $id_mesa_db = $res1['id'];
                   $id_m_db = $res1['cod_mesa'];
@@ -289,10 +289,10 @@ include_once'header.php';
                   <td>'.$row->customer_name.'</td>
                    <td>'.$row->mesa .'</td>
                   <td>'.$nome_cliente_db.'</td>
-                  <td><span class="label label-success">'."MT " .$row->subtotal.'</span></td>
-                  <td><span class="label label-success">'."MT " .$row->total.'</span></td>
+                  <td><span class="label label-success">'.number_format($row->subtotal, 2)." MT".'</span></td>
+                  <td><span class="label label-success">'.number_format($row->total, 2)." MT".'</span></td>
                   <td>'.$row->order_date.'</td>
-
+                  </tr>
                   ';
 
                 }          
