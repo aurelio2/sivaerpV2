@@ -108,15 +108,15 @@ if($saida<1){
 
 $html .= '<tr>';
 $html .= '<td align="left">&nbsp;'.strtoupper($row->pname).'</td>';
-$html .= '<td align="center">'.$stock.'</td>';
-$html .= '<td align="center">'.$qtds.'</td>';
-$html .= '<td align="center">'.$saida.'</td>';
+$html .= '<td align="center">'.number_format($stock, 1).'</td>';
+$html .= '<td align="center">'.($qtds === '-' ? '-' : number_format($qtds, 1)).'</td>';
+$html .= '<td align="center">'.($saida === '-' ? '-' : number_format($saida, 1)).'</td>';
 if($ajuste==0){
 	$html .= '<td align="center">-</td>';		
 }else{
-	$html .= '<td align="center">'.$ajuste.'</td>';	
+	$html .= '<td align="center">'.number_format($ajuste, 1).'</td>';	
 }	
-$html .= '<td align="center">'.$stock_final2.'</td>';
+$html .= '<td align="center">'.number_format($stock_final2, 1).'</td>';
 $html .= '<td align="right">'.number_format($row->purchaseprice,2).'&nbsp;&nbsp;</td>';				
 $html .= '<td align="right">'.number_format($row->saleprice,2).'&nbsp;&nbsp;</td>';					
 $html .= '<td align="right">'.$total.'&nbsp;&nbsp;</td>';	

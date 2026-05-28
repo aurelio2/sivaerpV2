@@ -133,16 +133,16 @@ if($saida<1){
 
 $html .= '<tr>';
 $html .= '<td align="left">'.strtoupper($row->pname).'</td>';
-$html .= '<td align="center">'.$stock.'</td>';
-$html .= '<td align="center">'.$qtds.'</td>';
-$html .= '<td align="center">'.$saida.'</td>';  
+$html .= '<td align="center">'.number_format($stock, 1).'</td>';
+$html .= '<td align="center">'.($qtds ? number_format($qtds, 1) : '-').'</td>';
+$html .= '<td align="center">'.($saida === '-' ? '-' : number_format($saida, 1)).'</td>';  
 if($ajuste==0){
     $html .= '<td align="center">-</td>';       
 }else{
-    $html .= '<td align="center">'.$ajuste.'</td>'; 
+    $html .= '<td align="center">'.number_format($ajuste, 1).'</td>'; 
 }
 
-$html .= '<td align="center">'.$stock_final2.'</td>';               
+$html .= '<td align="center">'.number_format($stock_final2, 1).'</td>';               
 $html .= '<td align="right">'.number_format($row->saleprice,2).'&nbsp;</td>';               
 $html .= '<td align="right">'.$total.'&nbsp;</td>';
 $html .= '<td align="center">'.$sai['t_iva'].'</td>';                    
@@ -184,14 +184,14 @@ $html .= '<tr style="background-Color: white;">
 $html .= '<tr style="background-Color: white;">
 <td colspan=7>STOCK ANT- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - --</td>
 
-<td align="right"> '.number_format($total_stock_final+$resultado->saidaFinal).'&nbsp;</td>
+<td align="right"> '.number_format($total_stock_final+$resultado->saidaFinal, 1).'&nbsp;</td>
 <td align="center">  -----&nbsp;&nbsp;
 </tr>';
     
 $html .= '<tr style="background-Color: white;">
 <td colspan=7>TOTAL DE ITENS VENDIDOS - - - - - - - - - - - - - - - - - - - - - - - - - - ---</td>
 
-<td align="right"> '.number_format($resultado->saidaFinal).' &nbsp;</td>
+<td align="right"> '.number_format($resultado->saidaFinal, 1).' &nbsp;</td>
 <td align="center">  '.number_format($resultado->soma_iva,2).' MT&nbsp;&nbsp;
 </tr>';
 $html .= '<tr style="background-Color: white;">
@@ -209,7 +209,7 @@ $html .= '<tr style="background-Color:white;">
 $html .= '<tr style="background-Color: white;">
 <td colspan=7>STOCK TOTAL ACTUAL- - - - - - - - - - - - - - - - - - - - - - - - - - - - - ---</td>
 
-<td align="right"> '.number_format($total_stock_final).'&nbsp;</td>
+<td align="right"> '.number_format($total_stock_final, 1).'&nbsp;</td>
 <td align="center">  -----&nbsp;&nbsp;
 </tr>';
 
